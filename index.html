@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>قوانین پرواز</title>
+    <title>منوی اصلی ربات</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body {
@@ -14,7 +14,7 @@
             padding: 20px;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; /* Align content to the top */
+            justify-content: flex-start;
             align-items: center;
             min-height: 100vh;
             margin: 0;
@@ -22,26 +22,29 @@
         }
         .container {
             background-color: var(--tg-theme-secondary-bg-color, #fff);
-            padding: 30px;
+            padding: 20px;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            max-width: 500px;
-            width: 90%;
-            margin-top: 20px; /* Add some space from the top */
+            max-width: 550px; /* Increased max-width for better button layout */
+            width: 95%;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* Space between rows of buttons */
         }
         h1 {
             color: var(--tg-theme-link-color, #0056b3);
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             font-size: 1.8em;
         }
-        .button-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* 2 or 3 columns, depending on space */
-            gap: 15px;
+        .button-row {
+            display: flex;
+            flex-wrap: wrap; /* Allow buttons to wrap to next line if needed */
+            justify-content: center;
+            gap: 10px; /* Space between buttons in a row */
             width: 100%;
-            margin-top: 20px;
         }
-        .link-button {
+        .main-menu-button {
             background-color: var(--tg-theme-button-color, #007bff);
             color: var(--tg-theme-button-text-color, white);
             border: none;
@@ -50,32 +53,69 @@
             font-size: 1em;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            text-decoration: none; /* Remove underline for links acting as buttons */
+            text-decoration: none;
             display: flex;
             justify-content: center;
             align-items: center;
-            white-space: nowrap; /* Prevent text wrapping */
-            overflow: hidden; /* Hide overflow text */
-            text-overflow: ellipsis; /* Show ellipsis for overflow text */
+            flex-grow: 1; /* Allow buttons to grow and fill space */
+            min-width: 120px; /* Minimum width for buttons */
+            max-width: 48%; /* Max width to allow two buttons per row on larger screens */
+            box-sizing: border-box;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
-        .link-button:hover {
+        /* Adjust for single button rows */
+        .button-row .main-menu-button.full-width {
+            max-width: 100%;
+        }
+        .main-menu-button:hover {
             opacity: 0.9;
+        }
+
+        /* Styling for placeholder buttons (if you decide to use them) */
+        .placeholder-button {
+            background-color: var(--tg-theme-hint-color, #999); /* A more subdued color */
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>قوانین پرواز کشورها</h1>
-        <p>لطفاً کشور مورد نظر خود را انتخاب کنید تا قوانین مربوطه را مشاهده کنید:</p>
-        <div class="button-grid">
-            <a href="https://t.me/koolbar_international/81" class="link-button" target="_blank">کانادا 🇨🇦</a>
-            <a href="https://t.me/koolbar_international/508" class="link-button" target="_blank">ایتالیا 🇮🇹</a>
-            <a href="https://www.alibaba.ir/mag/travel-facts/customs-regulations-travelers-luggage/" class="link-button" target="_blank">ایران 🇮🇷 (وب‌سایت)</a>
-            <a href="https://t.me/koolbar_international/540" class="link-button" target="_blank">بریتانیا 🇬🇧</a>
-            <a href="https://t.me/koolbar_international/542" class="link-button" target="_blank">آمریکا 🇺🇸</a>
-            <a href="https://t.me/koolbar_international/636" class="link-button" target="_blank">اروپا 🇪🇺</a>
-            <a href="https://t.me/koolbar_international/637" class="link-button" target="_blank">ایران 🇮🇷 (ممنوعات)</a>
+        <h1>منوی اصلی</h1>
+        <p>لطفاً یکی از گزینه‌های زیر را انتخاب کنید:</p>
+
+        <div class="button-row">
+            <a href="https://t.me/koolbar_international" class="main-menu-button" data-type="url">درآمد مسافری</a>
+            <button class="main-menu-button placeholder-button" data-type="callback" data-callback="wikibutton">مفید</button>
         </div>
+
+        <div class="button-row">
+            <button class="main-menu-button placeholder-button" data-type="callback" data-callback="currency_payment">پرداخت ارزی</button>
+            <a href="https://t.me/koolbar_international" class="main-menu-button" data-type="url">حمل و نقل هوایی</a>
+        </div>
+
+        <div class="button-row">
+            <button class="main-menu-button placeholder-button full-width" data-type="callback" data-callback="exchangerate">نرخ ارز</button>
+        </div>
+
+        <div class="button-row">
+            <a href="https://fids.airport.ir/" class="main-menu-button full-width" data-type="url">اطلاعات پرواز ایران</a>
+        </div>
+
+        <div class="button-row">
+            <button class="main-menu-button placeholder-button" data-type="callback" data-callback="flight_position">وضعیت پرواز</button>
+            <button class="main-menu-button placeholder-button" data-type="callback" data-callback="choose_airport">وضعیت فرودگاه</button>
+        </div>
+
+        <div class="button-row">
+            <button class="main-menu-button placeholder-button" data-type="callback" data-callback="lastsecondbutt">بلیط لحظه آخری</button>
+            <button class="main-menu-button placeholder-button" data-type="callback" data-callback="country">گذرنامه</button>
+        </div>
+
+        <div class="button-row">
+            <button class="main-menu-button placeholder-button full-width" data-type="callback" data-callback="aboutus">تماس با ما</button>
+        </div>
+
     </div>
 
     <script>
@@ -86,7 +126,7 @@
         Telegram.WebApp.setBackgroundColor('bg_color');
         Telegram.WebApp.expand(); // برای اینکه وب اپ تمام صفحه شود
 
-        // فعال کردن دکمه اصلی وب‌اپ (اختیاری، اما می‌تواند برای بستن وب‌اپ استفاده شود)
+        // فعال کردن دکمه اصلی وب‌اپ
         Telegram.WebApp.MainButton.setText("بازگشت به ربات");
         Telegram.WebApp.MainButton.show();
         Telegram.WebApp.MainButton.onClick(function() {
@@ -109,16 +149,27 @@
         applyThemeParams();
         Telegram.WebApp.onEvent('themeChanged', applyThemeParams); // بروزرسانی در صورت تغییر تم تلگرام
 
-        // مدیریت کلیک روی لینک‌ها با استفاده از Telegram.WebApp.openLink
-        // این کار باعث می شود لینک ها به صورت بهینه در تلگرام باز شوند.
-        document.querySelectorAll('.link-button').forEach(button => {
+        // مدیریت کلیک روی دکمه‌ها
+        document.querySelectorAll('.main-menu-button').forEach(button => {
             button.addEventListener('click', function(event) {
-                event.preventDefault(); // جلوگیری از رفتار پیش فرض لینک
-                const url = this.href;
-                if (Telegram.WebApp.openLink) {
-                    Telegram.WebApp.openLink(url);
-                } else {
-                    window.open(url, '_blank'); // fallback برای مرورگرهای عادی
+                const type = this.dataset.type; // 'url' or 'callback'
+
+                if (type === 'url') {
+                    event.preventDefault(); // جلوگیری از رفتار پیش فرض لینک
+                    const url = this.href;
+                    if (Telegram.WebApp.openLink) {
+                        Telegram.WebApp.openLink(url); // باز کردن لینک با API تلگرام
+                    } else {
+                        window.open(url, '_blank'); // Fallback
+                    }
+                } else if (type === 'callback') {
+                    const callbackData = this.dataset.callback;
+                    // اینجا می توانید داده callback را به ربات ارسال کنید
+                    // برای این مثال، فقط یک هشدار نمایش می دهیم و وب اپ را می بندیم
+                    Telegram.WebApp.showAlert(`این دکمه در حال حاضر اطلاعات را به ربات ارسال می‌کند: ${callbackData}`);
+                    // می‌توانید این خط را برای ارسال داده به ربات فعال کنید:
+                    // Telegram.WebApp.sendData(JSON.stringify({ action: 'callback_button_click', data: callbackData }));
+                    Telegram.WebApp.close(); // وب اپ را می بندیم
                 }
             });
         });
