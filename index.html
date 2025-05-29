@@ -25,23 +25,43 @@
             padding: 20px;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            max-width: 550px; /* Increased max-width for better button layout */
+            max-width: 550px;
             width: 95%;
             margin-top: 20px;
             display: flex;
             flex-direction: column;
-            gap: 10px; /* Space between rows of buttons */
+            gap: 10px;
         }
         h1 {
             color: var(--tg-theme-link-color, #0056b3);
             margin-bottom: 20px;
             font-size: 1.8em;
         }
+        .user-profile {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .user-profile img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--tg-theme-link-color, #007bff);
+        }
+        .user-profile p {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: var(--tg-theme-text-color, #333);
+            margin: 0;
+        }
         .button-row {
             display: flex;
-            flex-wrap: wrap; /* Allow buttons to wrap to next line if needed */
+            flex-wrap: wrap;
             justify-content: center;
-            gap: 10px; /* Space between buttons in a row */
+            gap: 10px;
             width: 100%;
         }
         .main-menu-button {
@@ -57,31 +77,34 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-grow: 1; /* Allow buttons to grow and fill space */
-            min-width: 120px; /* Minimum width for buttons */
-            max-width: 48%; /* Max width to allow two buttons per row on larger screens */
+            flex-grow: 1;
+            min-width: 120px;
+            max-width: 48%;
             box-sizing: border-box;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        /* Adjust for single button rows */
         .button-row .main-menu-button.full-width {
             max-width: 100%;
         }
         .main-menu-button:hover {
             opacity: 0.9;
         }
-
-        /* Styling for placeholder buttons (if you decide to use them) */
         .placeholder-button {
-            background-color: var(--tg-theme-hint-color, #999); /* A more subdued color */
+            background-color: var(--tg-theme-hint-color, #999);
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>منوی اصلی</h1>
+        
+        <div class="user-profile">
+            <img id="userProfilePic" src="https://via.placeholder.com/80" alt="عکس پروفایل" style="display: none;">
+            <p id="userNameDisplay">کاربر تلگرام</p>
+        </div>
+
         <p>لطفاً یکی از گزینه‌های زیر را انتخاب کنید:</p>
 
         <div class="button-row">
@@ -115,7 +138,6 @@
         <div class="button-row">
             <button class="main-menu-button placeholder-button full-width" data-type="callback" data-callback="aboutus">تماس با ما</button>
         </div>
-
     </div>
 
     <script>
@@ -147,29 +169,61 @@
             }
         };
         applyThemeParams();
-        Telegram.WebApp.onEvent('themeChanged', applyThemeParams); // بروزرسانی در صورت تغییر تم تلگرام
+        Telegram.WebApp.onEvent('themeChanged', applyThemeParams);
 
-        // مدیریت کلیک روی دکمه‌ها
+        // --- کد جدید برای نمایش عکس پروفایل و نام کاربر ---
+        const userProfilePic = document.getElementById('userProfilePic');
+        const userNameDisplay = document.getElementById('userNameDisplay');
+
+        // initDataUnsafe شامل اطلاعات کاربر است
+        const initData = Telegram.WebApp.initDataUnsafe;
+
+        if (initData && initData.user) {
+            const user = initData.user;
+            let displayName = 'کاربر تلگرام'; // Default display name
+
+            if (user.first_name) {
+                displayName = user.first_name;
+                if (user.last_name) {
+                    displayName += ` ${user.last_name}`;
+                }
+            } else if (user.username) {
+                displayName = `@${user.username}`;
+            }
+
+            userNameDisplay.textContent = displayName;
+
+            if (user.photo_url) {
+                userProfilePic.src = user.photo_url;
+                userProfilePic.style.display = 'block'; // نمایش عکس اگر موجود باشد
+            } else {
+                userProfilePic.style.display = 'none'; // پنهان کردن عکس اگر موجود نباشد
+            }
+        } else {
+            userNameDisplay.textContent = "کاربر ناشناس";
+            userProfilePic.style.display = 'none';
+        }
+        // --- پایان کد جدید ---
+
+        // مدیریت کلیک روی دکمه‌ها (همانند قبل)
         document.querySelectorAll('.main-menu-button').forEach(button => {
             button.addEventListener('click', function(event) {
-                const type = this.dataset.type; // 'url' or 'callback'
+                const type = this.dataset.type;
 
                 if (type === 'url') {
-                    event.preventDefault(); // جلوگیری از رفتار پیش فرض لینک
+                    event.preventDefault();
                     const url = this.href;
                     if (Telegram.WebApp.openLink) {
-                        Telegram.WebApp.openLink(url); // باز کردن لینک با API تلگرام
+                        Telegram.WebApp.openLink(url);
                     } else {
-                        window.open(url, '_blank'); // Fallback
+                        window.open(url, '_blank');
                     }
                 } else if (type === 'callback') {
                     const callbackData = this.dataset.callback;
-                    // اینجا می توانید داده callback را به ربات ارسال کنید
-                    // برای این مثال، فقط یک هشدار نمایش می دهیم و وب اپ را می بندیم
                     Telegram.WebApp.showAlert(`این دکمه در حال حاضر اطلاعات را به ربات ارسال می‌کند: ${callbackData}`);
                     // می‌توانید این خط را برای ارسال داده به ربات فعال کنید:
                     // Telegram.WebApp.sendData(JSON.stringify({ action: 'callback_button_click', data: callbackData }));
-                    Telegram.WebApp.close(); // وب اپ را می بندیم
+                    Telegram.WebApp.close();
                 }
             });
         });
