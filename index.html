@@ -3,37 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صفحه ساده</title>
+    <title>بلیط لحظه آخری</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
+            background-color: var(--tg-theme-bg-color, #f4f4f4);
+            color: var(--tg-theme-text-color, #333);
             text-align: center;
-            padding: 50px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            background-color: var(--tg-theme-secondary-bg-color, #fff);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 90%;
         }
         h1 {
-            color: #0056b3;
+            color: var(--tg-theme-link-color, #0056b3);
+            margin-bottom: 25px;
+            font-size: 1.8em;
         }
         p {
             font-size: 1.1em;
             line-height: 1.6;
+            margin-bottom: 20px;
         }
-        .container {
-            background-color: #fff;
-            margin: 0 auto;
-            padding: 30px;
+        textarea {
+            width: calc(100% - 20px);
+            padding: 12px 10px;
+            margin-bottom: 25px;
+            border: 1px solid var(--tg-theme-hint-color, #ccc);
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            max-width: 600px;
+            font-size: 1em;
+            resize: vertical;
+            min-height: 100px;
+            background-color: var(--tg-theme-field-bg-color, #eee);
+            color: var(--tg-theme-text-color, #333);
+        }
+        button {
+            background-color: var(--tg-theme-button-color, #007bff);
+            color: var(--tg-theme-button-text-color, white);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        #statusMessage {
+            margin-top: 20px;
+            font-weight: bold;
+            color: var(--tg-theme-text-color, #333);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>سلام دنیا!</h1>
-        <p>این یک صفحه HTML بسیار ساده است.</p>
-        <p>شما می‌توانید این کد را ذخیره کرده و در مرورگر خود باز کنید.</p>
+        <h1>درخواست بلیط لحظه آخری</h1>
+        <p>لطفاً جزئیات درخواست بلیط لحظه آخری خود را وارد کنید (مثلاً: مبدأ، مقصد، تاریخ، تعداد مسافران، بودجه تقریبی و...).</p>
+        <textarea id="requestInput" placeholder="مثال: بلیط از تهران به استانبول، هفته آینده، 2 نفر، زیر 10 میلیون تومان"></textarea>
+        <button id="submitBtn">ارسال درخواست</button>
+        <p id="statusMessage"></p>
     </div>
+
+    <script>
+        // مطمئن شوید که WebApp آماده است
+        Telegram.WebApp.ready();
+
+        // تنظیم رنگ پس‌زمینه و هدر وب‌اپ مطابق با تم تلگرام
+        Telegram.WebApp.setHeaderColor('secondary_bg_color');
+        Telegram.WebApp.setBackgroundColor('bg_color');
+
+        // فعال کردن دکمه اصلی وب‌اپ (اختیاری، اما می‌تواند برای بستن وب‌اپ استفاده شود)
+        Telegram.WebApp.MainButton.setText("بازگشت به ربات");
+        Telegram.WebApp.MainButton.show();
+        Telegram.WebApp.MainButton.onClick(function() {
+            Telegram.WebApp.close(); // بستن وب‌اپ هنگام کلیک روی دکمه اصلی
+        });
+
+        // دریافت پارامترهای تم تلگرام و اعمال آنها به CSS متغیرها
+        const applyThemeParams = () => {
+            const themeParams = Telegram.WebApp.themeParams;
+            if (themeParams) {
+                document.documentElement.style.setProperty('--tg-theme-bg-color', themeParams.bg_color || '#f4f4f4');
+                document.documentElement.style.setProperty('--tg-theme-text-color', themeParams.text_color || '#333');
+                document.documentElement.style.setProperty('--tg-theme-hint-color', themeParams.hint_color || '#aaa');
+                document.documentElement.style.setProperty('--tg-theme-link-color', themeParams.link_color || '#0056b3');
+                document.documentElement.style.setProperty('--tg-theme-button-color', themeParams.button_color || '#007bff');
+                document.documentElement.style.setProperty('--tg-theme-button-text-color', themeParams.button_text_color || '#ffffff');
+                document.documentElement.style.setProperty('--tg-theme-secondary-bg-color', themeParams.secondary_bg_color || '#ffffff');
+                document.documentElement.style.setProperty('--tg-theme-field-bg-color', themeParams.secondary_bg_color || '#eee'); // یا هر رنگ مناسب دیگر
+            }
+        };
+
+        // اعمال تم بلافاصله و همچنین در صورت تغییر تم
+        applyThemeParams();
+        Telegram.WebApp.onEvent('themeChanged', applyThemeParams);
+
+
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            const requestText = document.getElementById('requestInput').value.trim();
+            const statusMessage = document.getElementById('statusMessage');
+
+            if (requestText) {
+                const dataToSend = {
+                    type: 'last_minute_ticket_request', // نوع درخواست
+                    details: requestText,
+                    user_id: Telegram.WebApp.initDataUnsafe.user.id // ارسال ID کاربر (اختیاری)
+                };
+                Telegram.WebApp.sendData(JSON.stringify(dataToSend));
+                statusMessage.textContent = "درخواست شما ارسال شد. لطفا منتظر پاسخ ربات باشید.";
+                // می توانید پس از ارسال موفقیت آمیز، دکمه را غیرفعال کنید یا وب اپ را ببندید
+                document.getElementById('submitBtn').disabled = true;
+                // Telegram.WebApp.close(); // می توانید اینجا وب اپ را ببندید
+            } else {
+                statusMessage.textContent = "لطفاً جزئیات درخواست را وارد کنید.";
+                statusMessage.style.color = 'red';
+            }
+        });
+    </script>
 </body>
 </html>
