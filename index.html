@@ -99,22 +99,6 @@
         .callback-button:hover {
             background-color: var(--tg-theme-hint-color, #888);
         }
-        .data-display {
-            background-color: var(--tg-theme-secondary-bg-color, #fff);
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
-            text-align: right;
-            white-space: pre-wrap;
-            font-size: 0.9em;
-            max-height: 300px;
-            overflow-y: auto;
-            direction: rtl;
-        }
-        .loading {
-            font-style: italic;
-            color: var(--tg-theme-hint-color, #888);
-        }
     </style>
 </head>
 <body>
@@ -150,7 +134,6 @@
         <div class="button-row">
             <button class="main-menu-button callback-button full-width" data-type="callback" data-callback="aboutus">تماس با ما</button>
         </div>
-        <div id="dataDisplay" class="data-display" style="display: none;"></div>
     </div>
     <script>
         Telegram.WebApp.ready();
@@ -178,7 +161,6 @@
         Telegram.WebApp.onEvent('themeChanged', applyThemeParams);
         const userProfilePic = document.getElementById('userProfilePic');
         const userNameDisplay = document.getElementById('userNameDisplay');
-        const dataDisplay = document.getElementById('dataDisplay');
         const initData = Telegram.WebApp.initDataUnsafe;
         if (initData && initData.user) {
             const user = initData.user;
@@ -215,30 +197,15 @@
                     }
                 } else if (type === 'callback') {
                     const callbackData = this.dataset.callback;
-                    dataDisplay.textContent = 'در حال بارگذاری...';
-                    dataDisplay.classList.add('loading');
-                    dataDisplay.style.display = 'block';
-                    Telegram.WebApp.sendData(JSON.stringify({ action: 'web_app_callback', data: callbackData }));
+                    if (callbackData === 'aboutus') {
+                        Telegram.WebApp.sendData(JSON.stringify({ action: 'web_app_callback', data: callbackData }));
+                        Telegram.WebApp.close();
+                    } else {
+                        Telegram.WebApp.sendData(JSON.stringify({ action: 'web_app_callback', data: callbackData }));
+                        Telegram.WebApp.close();
+                    }
                 }
             });
-        });
-        Telegram.WebApp.onEvent('webAppData', function(event) {
-            try {
-                const data = JSON.parse(event.data);
-                if (data.action === 'callback_response' && data.data) {
-                    dataDisplay.textContent = data.data;
-                    dataDisplay.classList.remove('loading');
-                    dataDisplay.style.display = 'block';
-                } else {
-                    dataDisplay.textContent = 'داده‌ای برای نمایش وجود ندارد';
-                    dataDisplay.classList.remove('loading');
-                    dataDisplay.style.display = 'block';
-                }
-            } catch (e) {
-                dataDisplay.textContent = 'خطا در دریافت داده‌ها: ' + e.message;
-                dataDisplay.classList.remove('loading');
-                dataDisplay.style.display = 'block';
-            }
         });
     </script>
 </body>
