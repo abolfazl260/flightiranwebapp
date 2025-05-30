@@ -136,12 +136,12 @@
         </div>
     </div>
     <script>
-        console.log("Web app script started");
+        console.log("Web app script started at " + new Date().toISOString());
         if (!window.Telegram || !window.Telegram.WebApp) {
             console.error("Telegram WebApp SDK not loaded");
-            alert("Error: Telegram WebApp SDK failed to load");
+            alert("خطا: اسکریپت وب اپ تلگرام بارگذاری نشد. لطفاً دوباره امتحان کنید.");
         } else {
-            console.log("Telegram WebApp SDK loaded successfully");
+            console.log("Telegram WebApp SDK loaded successfully, version: " + (Telegram.WebApp.version || "unknown"));
             Telegram.WebApp.ready();
             console.log("WebApp initialized with ready()");
         }
@@ -166,7 +166,7 @@
                 document.documentElement.style.setProperty('--tg-theme-button-color', themeParams.button_color || '#007bff');
                 document.documentElement.style.setProperty('--tg-theme-button-text-color', themeParams.button_text_color || '#ffffff');
                 document.documentElement.style.setProperty('--tg-theme-secondary-bg-color', themeParams.secondary_bg_color || '#ffffff');
-                console.log("Theme params applied:", themeParams);
+                console.log("Theme params applied:", JSON.stringify(themeParams));
             } else {
                 console.warn("No theme params available");
             }
@@ -198,7 +198,7 @@
             } else {
                 userProfilePic.style.display = 'none';
             }
-            console.log("User data loaded:", { id: user.id, displayName: displayName, hasPhoto: !!user.photo_url });
+            console.log("User data loaded:", JSON.stringify({ id: user.id, displayName: displayName, hasPhoto: !!user.photo_url }));
         } else {
             userNameDisplay.textContent = "کاربر ناشناس";
             userProfilePic.style.display = 'none';
@@ -209,7 +209,7 @@
             button.addEventListener('click', function(event) {
                 const type = this.dataset.type;
                 const callbackData = this.dataset.callback;
-                console.log("Button clicked:", { type: type, callbackData: callbackData, text: this.textContent });
+                console.log("Button clicked:", JSON.stringify({ type: type, callbackData: callbackData, text: this.textContent }));
 
                 if (type === 'url') {
                     event.preventDefault();
@@ -233,11 +233,11 @@
                             console.log("Web app closed after sending data");
                         } else {
                             console.error("Telegram.WebApp.sendData not available");
-                            Telegram.WebApp.showAlert(`Error: Unable to send data: ${callbackData}`);
+                            Telegram.WebApp.showAlert(`خطا: قادر به ارسال داده به ربات نیستیم: ${callbackData}`);
                         }
                     } catch (error) {
-                        console.error("Error sending callback data:", error);
-                        Telegram.WebApp.showAlert("Error processing button click: " + error.message);
+                        console.error("Error sending callback data:", error.message);
+                        Telegram.WebApp.showAlert(`خطا در پردازش کلیک دکمه: ${error.message}`);
                     }
                 }
             });
