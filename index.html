@@ -6,10 +6,8 @@
     <title>منوی اصلی ربات</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        /* استایل‌های پایه برای بدنه صفحه */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* استفاده از متغیرهای تم تلگرام برای رنگ‌ها */
             background-color: var(--tg-theme-bg-color, #f4f4f4);
             color: var(--tg-theme-text-color, #333);
             text-align: center;
@@ -22,26 +20,23 @@
             margin: 0;
             box-sizing: border-box;
         }
-        /* استایل کانتینر اصلی محتوا */
         .container {
             background-color: var(--tg-theme-secondary-bg-color, #fff);
             padding: 20px;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            max-width: 550px; /* حداکثر عرض برای چیدمان بهتر دکمه‌ها */
+            max-width: 550px;
             width: 95%;
             margin-top: 20px;
             display: flex;
             flex-direction: column;
-            gap: 10px; /* فاصله بین ردیف‌های دکمه‌ها */
+            gap: 10px;
         }
-        /* استایل عنوان اصلی */
         h1 {
             color: var(--tg-theme-link-color, #0056b3);
             margin-bottom: 20px;
             font-size: 1.8em;
         }
-        /* استایل بخش پروفایل کاربر */
         .user-profile {
             margin-bottom: 20px;
             display: flex;
@@ -49,30 +44,26 @@
             align-items: center;
             gap: 10px;
         }
-        /* استایل عکس پروفایل */
         .user-profile img {
             width: 80px;
             height: 80px;
-            border-radius: 50%; /* دایره‌ای کردن عکس */
-            object-fit: cover; /* پوشش کامل ناحیه */
-            border: 3px solid var(--tg-theme-link-color, #007bff); /* حاشیه دور عکس */
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--tg-theme-link-color, #007bff);
         }
-        /* استایل نام کاربر */
         .user-profile p {
             font-size: 1.1em;
             font-weight: bold;
             color: var(--tg-theme-text-color, #333);
             margin: 0;
         }
-        /* استایل ردیف دکمه‌ها */
         .button-row {
             display: flex;
-            flex-wrap: wrap; /* اجازه می‌دهد دکمه‌ها در صورت نیاز به خط بعدی بروند */
+            flex-wrap: wrap;
             justify-content: center;
-            gap: 10px; /* فاصله بین دکمه‌ها در یک ردیف */
+            gap: 10px;
             width: 100%;
         }
-        /* استایل عمومی برای تمام دکمه‌های منو */
         .main-menu-button {
             background-color: var(--tg-theme-button-color, #007bff);
             color: var(--tg-theme-button-text-color, white);
@@ -82,100 +73,90 @@
             font-size: 1em;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            text-decoration: none; /* حذف خط زیر لینک‌ها */
+            text-decoration: none;
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-grow: 1; /* اجازه می‌دهد دکمه‌ها رشد کرده و فضا را پر کنند */
-            min-width: 120px; /* حداقل عرض برای دکمه‌ها */
-            max-width: 48%; /* حداکثر عرض برای دو دکمه در هر ردیف در صفحه‌های بزرگتر */
+            flex-grow: 1;
+            min-width: 120px;
+            max-width: 48%;
             box-sizing: border-box;
-            white-space: nowrap; /* جلوگیری از شکستن متن */
-            overflow: hidden; /* پنهان کردن متن اضافی */
-            text-overflow: ellipsis; /* نمایش سه نقطه برای متن اضافی */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
-        /* تنظیم عرض کامل برای دکمه‌هایی که تنها در یک ردیف قرار می‌گیرند */
         .button-row .main-menu-button.full-width {
             max-width: 100%;
         }
-        /* افکت هاور برای دکمه‌ها */
         .main-menu-button:hover {
             opacity: 0.9;
         }
-        /* استایل خاص برای دکمه‌هایی که callback_data ارسال می‌کنند (برای تمایز بصری) */
         .callback-button {
-            background-color: var(--tg-theme-secondary-bg-color, #999); /* رنگ پس‌زمینه متفاوت */
-            color: var(--tg-theme-text-color, #333); /* رنگ متن متفاوت */
-            border: 1px solid var(--tg-theme-hint-color, #ccc); /* حاشیه برای تمایز */
+            background-color: var(--tg-theme-secondary-bg-color, #999);
+            color: var(--tg-theme-text-color, #333);
+            border: 1px solid var(--tg-theme-hint-color, #ccc);
         }
         .callback-button:hover {
-            background-color: var(--tg-theme-hint-color, #888); /* افکت هاور برای دکمه‌های callback */
+            background-color: var(--tg-theme-hint-color, #888);
+        }
+        .data-display {
+            background-color: var(--tg-theme-secondary-bg-color, #fff);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: left;
+            white-space: pre-wrap;
+            font-size: 0.9em;
+            max-height: 300px;
+            overflow-y: auto;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>منوی اصلی</h1>
-        
         <div class="user-profile">
             <img id="userProfilePic" src="https://via.placeholder.com/80" alt="عکس پروفایل" style="display: none;">
             <p id="userNameDisplay">کاربر تلگرام</p>
         </div>
-
         <p>لطفاً یکی از گزینه‌های زیر را انتخاب کنید:</p>
-
         <div class="button-row">
             <a href="https://t.me/koolbar_international" class="main-menu-button" data-type="url">درآمد مسافری</a>
             <button class="main-menu-button callback-button" data-type="callback" data-callback="wikibutton">مفید</button>
         </div>
-
         <div class="button-row">
             <button class="main-menu-button callback-button" data-type="callback" data-callback="currency_payment">پرداخت ارزی</button>
             <a href="https://t.me/koolbar_international" class="main-menu-button" data-type="url">حمل و نقل هوایی</a>
         </div>
-
         <div class="button-row">
             <button class="main-menu-button callback-button full-width" data-type="callback" data-callback="exchangerate">نرخ ارز</button>
         </div>
-
         <div class="button-row">
             <a href="https://fids.airport.ir/" class="main-menu-button full-width" data-type="url">اطلاعات پرواز ایران</a>
         </div>
-
         <div class="button-row">
             <button class="main-menu-button callback-button" data-type="callback" data-callback="flight_position">وضعیت پرواز</button>
             <button class="main-menu-button callback-button" data-type="callback" data-callback="choose_airport">وضعیت فرودگاه</button>
         </div>
-
         <div class="button-row">
             <button class="main-menu-button callback-button" data-type="callback" data-callback="lastsecondbutt">بلیط لحظه آخری</button>
             <button class="main-menu-button callback-button" data-type="callback" data-callback="country">گذرنامه</button>
         </div>
-
         <div class="button-row">
             <button class="main-menu-button callback-button full-width" data-type="callback" data-callback="aboutus">تماس با ما</button>
         </div>
+        <div id="dataDisplay" class="data-display" style="display: none;"></div>
     </div>
-
     <script>
-        // اطمینان حاصل کنید که Telegram Web App SDK بارگذاری شده و آماده است
         Telegram.WebApp.ready();
-
-        // تنظیم رنگ‌های هدر و پس‌زمینه وب‌اپ مطابق با تم تلگرام کاربر
         Telegram.WebApp.setHeaderColor('secondary_bg_color');
         Telegram.WebApp.setBackgroundColor('bg_color');
-        // وب‌اپ را به حالت تمام صفحه گسترش دهید
         Telegram.WebApp.expand();
-
-        // فعال کردن دکمه اصلی (Main Button) تلگرام در پایین وب‌اپ
         Telegram.WebApp.MainButton.setText("بازگشت به ربات");
         Telegram.WebApp.MainButton.show();
-        // تعریف عملکرد هنگام کلیک روی دکمه اصلی: بستن وب‌اپ
         Telegram.WebApp.MainButton.onClick(function() {
             Telegram.WebApp.close();
         });
-
-        // تابعی برای اعمال پارامترهای تم تلگرام به متغیرهای CSS
         const applyThemeParams = () => {
             const themeParams = Telegram.WebApp.themeParams;
             if (themeParams) {
@@ -188,22 +169,15 @@
                 document.documentElement.style.setProperty('--tg-theme-secondary-bg-color', themeParams.secondary_bg_color || '#ffffff');
             }
         };
-        // اعمال تم هنگام بارگذاری و در صورت تغییر تم توسط کاربر
         applyThemeParams();
         Telegram.WebApp.onEvent('themeChanged', applyThemeParams);
-
-        // --- کد نمایش عکس پروفایل و نام کاربر ---
         const userProfilePic = document.getElementById('userProfilePic');
         const userNameDisplay = document.getElementById('userNameDisplay');
-
-        // initDataUnsafe شامل اطلاعات کاربر است که از تلگرام ارسال می‌شود
+        const dataDisplay = document.getElementById('dataDisplay');
         const initData = Telegram.WebApp.initDataUnsafe;
-
         if (initData && initData.user) {
             const user = initData.user;
-            let displayName = 'کاربر تلگرام'; // نام پیش‌فرض
-
-            // ساخت نام نمایشی کاربر
+            let displayName = 'کاربر تلگرام';
             if (user.first_name) {
                 displayName = user.first_name;
                 if (user.last_name) {
@@ -212,53 +186,48 @@
             } else if (user.username) {
                 displayName = `@${user.username}`;
             }
-
             userNameDisplay.textContent = displayName;
-
-            // نمایش عکس پروفایل اگر موجود باشد
             if (user.photo_url) {
                 userProfilePic.src = user.photo_url;
                 userProfilePic.style.display = 'block';
             } else {
-                userProfilePic.style.display = 'none'; // پنهان کردن عکس اگر موجود نباشد
+                userProfilePic.style.display = 'none';
             }
         } else {
-            // اگر اطلاعات کاربر در دسترس نباشد (مثلاً در مرورگر عادی باز شده باشد)
             userNameDisplay.textContent = "کاربر ناشناس";
             userProfilePic.style.display = 'none';
         }
-        // --- پایان کد نمایش عکس پروفایل ---
-
-        // مدیریت کلیک روی تمام دکمه‌های منو
         document.querySelectorAll('.main-menu-button').forEach(button => {
             button.addEventListener('click', function(event) {
-                const type = this.dataset.type; // دریافت نوع دکمه (url یا callback)
-
+                const type = this.dataset.type;
                 if (type === 'url') {
-                    event.preventDefault(); // جلوگیری از رفتار پیش‌فرض لینک
+                    event.preventDefault();
                     const url = this.href;
-                    // باز کردن لینک با استفاده از API تلگرام برای تجربه بهتر
                     if (Telegram.WebApp.openLink) {
                         Telegram.WebApp.openLink(url);
                     } else {
-                        // Fallback برای مرورگرهای عادی
                         window.open(url, '_blank');
                     }
                 } else if (type === 'callback') {
-                    const callbackData = this.dataset.callback; // دریافت callback_data از ویژگی data-callback
-                    // ارسال داده به ربات با استفاده از Telegram.WebApp.sendData
-                    if (Telegram.WebApp.sendData) {
-                        // ارسال یک آبجکت JSON شامل 'action' و 'data' به ربات
-                        Telegram.WebApp.sendData(JSON.stringify({ action: 'web_app_callback', data: callbackData }));
-                        // بستن وب‌اپ پس از ارسال داده
-                        Telegram.WebApp.close();
-                    } else {
-                        // Fallback اگر sendData پشتیبانی نشود (برای مرورگرهای غیرتلگرام)
-                        Telegram.WebApp.showAlert(`این دکمه در حال حاضر اطلاعات را به ربات ارسال می‌کند: ${callbackData}`);
-                        Telegram.WebApp.close();
-                    }
+                    const callbackData = this.dataset.callback;
+                    Telegram.WebApp.sendData(JSON.stringify({ action: 'web_app_callback', data: callbackData }));
                 }
             });
+        });
+        Telegram.WebApp.onEvent('webAppData', function(event) {
+            try {
+                const data = JSON.parse(event.data);
+                if (data.action === 'callback_response' && data.data) {
+                    dataDisplay.textContent = data.data;
+                    dataDisplay.style.display = 'block';
+                } else {
+                    dataDisplay.textContent = 'داده‌ای برای نمایش وجود ندارد';
+                    dataDisplay.style.display = 'block';
+                }
+            } catch (e) {
+                dataDisplay.textContent = 'خطا در پردازش داده‌ها';
+                dataDisplay.style.display = 'block';
+            }
         });
     </script>
 </body>
