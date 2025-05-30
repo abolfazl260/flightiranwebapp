@@ -136,7 +136,16 @@
         </div>
     </div>
     <script>
-        Telegram.WebApp.ready();
+        console.log("Web app script started");
+        if (!window.Telegram || !window.Telegram.WebApp) {
+            console.error("Telegram WebApp SDK not loaded");
+            alert("Error: Telegram WebApp SDK failed to load");
+        } else {
+            console.log("Telegram WebApp SDK loaded successfully");
+            Telegram.WebApp.ready();
+            console.log("WebApp initialized with ready()");
+        }
+
         Telegram.WebApp.setHeaderColor('secondary_bg_color');
         Telegram.WebApp.setBackgroundColor('bg_color');
         Telegram.WebApp.expand();
@@ -146,6 +155,7 @@
             console.log("MainButton clicked: Closing web app");
             Telegram.WebApp.close();
         });
+
         const applyThemeParams = () => {
             const themeParams = Telegram.WebApp.themeParams;
             if (themeParams) {
@@ -162,7 +172,11 @@
             }
         };
         applyThemeParams();
-        Telegram.WebApp.onEvent('themeChanged', applyThemeParams);
+        Telegram.WebApp.onEvent('themeChanged', () => {
+            console.log("Theme changed event triggered");
+            applyThemeParams();
+        });
+
         const userProfilePic = document.getElementById('userProfilePic');
         const userNameDisplay = document.getElementById('userNameDisplay');
         const initData = Telegram.WebApp.initDataUnsafe;
@@ -190,17 +204,20 @@
             userProfilePic.style.display = 'none';
             console.warn("No user data available in initDataUnsafe");
         }
+
         document.querySelectorAll('.main-menu-button').forEach(button => {
             button.addEventListener('click', function(event) {
                 const type = this.dataset.type;
                 const callbackData = this.dataset.callback;
                 console.log("Button clicked:", { type: type, callbackData: callbackData, text: this.textContent });
+
                 if (type === 'url') {
                     event.preventDefault();
                     const url = this.href;
                     console.log("Opening URL:", url);
                     if (Telegram.WebApp.openLink) {
                         Telegram.WebApp.openLink(url);
+                        console.log("URL opened with Telegram.WebApp.openLink");
                     } else {
                         console.warn("Telegram.WebApp.openLink not available, falling back to window.open");
                         window.open(url, '_blank');
@@ -208,18 +225,19 @@
                 } else if (type === 'callback') {
                     try {
                         const data = JSON.stringify({ action: 'web_app_callback', data: callbackData });
-                        console.log("Sending callback data to bot:", data);
+                        console.log("Preparing to send callback data to bot:", data);
                         if (Telegram.WebApp.sendData) {
                             Telegram.WebApp.sendData(data);
-                            console.log("Data sent successfully, closing web app");
+                            console.log("Callback data sent successfully:", data);
                             Telegram.WebApp.close();
+                            console.log("Web app closed after sending data");
                         } else {
                             console.error("Telegram.WebApp.sendData not available");
                             Telegram.WebApp.showAlert(`Error: Unable to send data: ${callbackData}`);
                         }
                     } catch (error) {
                         console.error("Error sending callback data:", error);
-                        Telegram.WebApp.showAlert("Error processing button click.");
+                        Telegram.WebApp.showAlert("Error processing button click: " + error.message);
                     }
                 }
             });
