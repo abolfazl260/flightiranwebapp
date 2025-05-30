@@ -143,6 +143,7 @@
         Telegram.WebApp.MainButton.setText("بازگشت به ربات");
         Telegram.WebApp.MainButton.show();
         Telegram.WebApp.MainButton.onClick(function() {
+            console.log("MainButton clicked: Closing web app");
             Telegram.WebApp.close();
         });
         const applyThemeParams = () => {
@@ -155,6 +156,9 @@
                 document.documentElement.style.setProperty('--tg-theme-button-color', themeParams.button_color || '#007bff');
                 document.documentElement.style.setProperty('--tg-theme-button-text-color', themeParams.button_text_color || '#ffffff');
                 document.documentElement.style.setProperty('--tg-theme-secondary-bg-color', themeParams.secondary_bg_color || '#ffffff');
+                console.log("Theme params applied:", themeParams);
+            } else {
+                console.warn("No theme params available");
             }
         };
         applyThemeParams();
@@ -180,29 +184,42 @@
             } else {
                 userProfilePic.style.display = 'none';
             }
+            console.log("User data loaded:", { id: user.id, displayName: displayName, hasPhoto: !!user.photo_url });
         } else {
             userNameDisplay.textContent = "کاربر ناشناس";
             userProfilePic.style.display = 'none';
+            console.warn("No user data available in initDataUnsafe");
         }
         document.querySelectorAll('.main-menu-button').forEach(button => {
             button.addEventListener('click', function(event) {
                 const type = this.dataset.type;
+                const callbackData = this.dataset.callback;
+                console.log("Button clicked:", { type: type, callbackData: callbackData, text: this.textContent });
                 if (type === 'url') {
                     event.preventDefault();
                     const url = this.href;
+                    console.log("Opening URL:", url);
                     if (Telegram.WebApp.openLink) {
                         Telegram.WebApp.openLink(url);
                     } else {
+                        console.warn("Telegram.WebApp.openLink not available, falling back to window.open");
                         window.open(url, '_blank');
                     }
                 } else if (type === 'callback') {
-                    const callbackData = this.dataset.callback;
-                    if (callbackData === 'aboutus') {
-                        Telegram.WebApp.sendData(JSON.stringify({ action: 'web_app_callback', data: callbackData }));
-                        Telegram.WebApp.close();
-                    } else {
-                        Telegram.WebApp.sendData(JSON.stringify({ action: 'web_app_callback', data: callbackData }));
-                        Telegram.WebApp.close();
+                    try {
+                        const data = JSON.stringify({ action: 'web_app_callback', data: callbackData });
+                        console.log("Sending callback data to bot:", data);
+                        if (Telegram.WebApp.sendData) {
+                            Telegram.WebApp.sendData(data);
+                            console.log("Data sent successfully, closing web app");
+                            Telegram.WebApp.close();
+                        } else {
+                            console.error("Telegram.WebApp.sendData not available");
+                            Telegram.WebApp.showAlert(`Error: Unable to send data: ${callbackData}`);
+                        }
+                    } catch (error) {
+                        console.error("Error sending callback data:", error);
+                        Telegram.WebApp.showAlert("Error processing button click.");
                     }
                 }
             });
