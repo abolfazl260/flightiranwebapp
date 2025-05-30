@@ -104,11 +104,16 @@
             padding: 15px;
             border-radius: 8px;
             margin-top: 20px;
-            text-align: left;
+            text-align: right;
             white-space: pre-wrap;
             font-size: 0.9em;
             max-height: 300px;
             overflow-y: auto;
+            direction: rtl;
+        }
+        .loading {
+            font-style: italic;
+            color: var(--tg-theme-hint-color, #888);
         }
     </style>
 </head>
@@ -210,6 +215,9 @@
                     }
                 } else if (type === 'callback') {
                     const callbackData = this.dataset.callback;
+                    dataDisplay.textContent = 'در حال بارگذاری...';
+                    dataDisplay.classList.add('loading');
+                    dataDisplay.style.display = 'block';
                     Telegram.WebApp.sendData(JSON.stringify({ action: 'web_app_callback', data: callbackData }));
                 }
             });
@@ -219,13 +227,16 @@
                 const data = JSON.parse(event.data);
                 if (data.action === 'callback_response' && data.data) {
                     dataDisplay.textContent = data.data;
+                    dataDisplay.classList.remove('loading');
                     dataDisplay.style.display = 'block';
                 } else {
                     dataDisplay.textContent = 'داده‌ای برای نمایش وجود ندارد';
+                    dataDisplay.classList.remove('loading');
                     dataDisplay.style.display = 'block';
                 }
             } catch (e) {
-                dataDisplay.textContent = 'خطا در پردازش داده‌ها';
+                dataDisplay.textContent = 'خطا در دریافت داده‌ها: ' + e.message;
+                dataDisplay.classList.remove('loading');
                 dataDisplay.style.display = 'block';
             }
         });
