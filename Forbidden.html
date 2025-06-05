@@ -1,0 +1,352 @@
+<\!DOCTYPE html\>
+
+\<html lang="fa" dir="rtl"\>
+\<head\>
+\<meta charset="UTF-8"\>
+\<meta name="viewport" content="width=device-width, initial-scale=1.0"\>
+\<title\>اینفوگرافیک جامع مقررات پروازهای بین‌المللی\</title\>
+\<script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"\>\</script\>
+\<script src="[https://cdn.jsdelivr.net/npm/chart.js](https://cdn.jsdelivr.net/npm/chart.js)"\>\</script\>
+\<link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)"\>
+\<link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin\>
+\<link href="[https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900\&display=swap](https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap)" rel="stylesheet"\>
+\<style\>
+body {
+font-family: 'Vazirmatn', sans-serif;
+background-color: \#f0f4f8;
+}
+.chart-container {
+position: relative;
+margin: auto;
+height: 40vh;
+width: 100%;
+max-width: 600px;
+max-height: 400px;
+}
+.rtl-grid {
+direction: rtl;
+}
+.card-header-icon {
+font-size: 3rem;
+line-height: 1;
+color: \#ef5675;
+}
+.gradient-text {
+background: linear-gradient(90deg, \#ef5675, \#bc5090, \#7a5195);
+\-webkit-background-clip: text;
+\-webkit-text-fill-color: transparent;
+}
+\</style\>
+\</head\>
+\<body class="bg-gray-50 text-gray-800"\>
+
+```
+<main class="container mx-auto p-4 md:p-8">
+
+    <header class="text-center mb-16">
+        <h1 class="text-4xl md:text-6xl font-black mb-4 gradient-text">راهنمای ضروری مسافر بین‌المللی</h1>
+        <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">پیمایش در قوانین پیچیده امنیت هوانوردی و گمرک کشورها؛ اینفوگرافیک جامع اقلام ممنوعه و محدود شده برای سفری هوشمند و بی‌دردسر.</p>
+    </header>
+
+    <section id="universal-rules" class="mb-20">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl font-bold text-gray-900">قوانین جهانی امنیت هوانوردی</h2>
+            <p class="text-gray-600 mt-2">این اقلام به دلیل خطر ذاتی، <span class="font-bold text-red-600">هرگز</span> در هیچ‌کدام از چمدان‌های دستی یا تحویلی مجاز نیستند.</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 text-center rtl-grid">
+            <div class="bg-white rounded-xl shadow-lg p-6 transform hover:scale-105 transition-transform duration-300">
+                <div class="card-header-icon mb-4">💣</div>
+                <h3 class="font-bold text-lg text-gray-800">مواد منفجره</h3>
+                <p class="text-sm text-gray-500 mt-2">دینامیت، باروت، فشفشه، مهمات</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-6 transform hover:scale-105 transition-transform duration-300">
+                <div class="card-header-icon mb-4">🔥</div>
+                <h3 class="font-bold text-lg text-gray-800">مواد قابل اشتعال</h3>
+                <p class="text-sm text-gray-500 mt-2">بنزین، رنگ، الکل غلیظ، گازها</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-6 transform hover:scale-105 transition-transform duration-300">
+                <div class="card-header-icon mb-4">🧪</div>
+                <h3 class="font-bold text-lg text-gray-800">مواد خورنده</h3>
+                <p class="text-sm text-gray-500 mt-2">اسیدها، سفیدکننده‌ها، جیوه</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-6 transform hover:scale-105 transition-transform duration-300">
+                <div class="card-header-icon mb-4">☠️</div>
+                <h3 class="font-bold text-lg text-gray-800">مواد سمی و عفونی</h3>
+                <p class="text-sm text-gray-500 mt-2">حشره‌کش‌ها، سیانید، ویروس‌ها</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-6 transform hover:scale-105 transition-transform duration-300 col-span-2 md:col-span-1 lg:col-span-1">
+                <div class="card-header-icon mb-4">☢️</div>
+                <h3 class="font-bold text-lg text-gray-800">مواد رادیواکتیو</h3>
+                <p class="text-sm text-gray-500 mt-2">ایزوتوپ‌های پزشکی، مواد صنعتی</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="restricted-items" class="mb-20">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl font-bold text-gray-900">اقلام محدود شده رایج</h2>
+            <p class="text-gray-600 mt-2">این اقلام مجاز هستند، اما تحت شرایط و محدودیت‌های خاصی برای مقدار، بسته‌بندی و نوع چمدان.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 rtl-grid">
+
+            <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center justify-center">
+                <h3 class="text-2xl font-bold mb-6 text-center text-gray-800">قانون مایعات، اسپری‌ها و ژل‌ها (LAGs)</h3>
+                <div class="flex items-center justify-center space-x-4 space-x-reverse w-full">
+                    <div class="text-center">
+                        <div class="bg-blue-100 border-2 border-dashed border-blue-400 rounded-lg p-4 w-24 h-24 flex items-center justify-center">
+                            <span class="font-black text-blue-800 text-2xl">100ml</span>
+                        </div>
+                        <p class="mt-2 text-sm text-gray-600">حداکثر حجم هر ظرف</p>
+                    </div>
+                    <div class="text-5xl text-gray-300 font-light">&rarr;</div>
+                    <div class="text-center">
+                        <div class="bg-green-100 border-2 border-dashed border-green-500 rounded-lg p-4 w-32 h-32 flex flex-col items-center justify-center">
+                            <span class="text-4xl">🛍️</span>
+                            <span class="font-bold text-green-800 text-xl">1L</span>
+                        </div>
+                        <p class="mt-2 text-sm text-gray-600">در یک کیسه شفاف</p>
+                    </div>
+                </div>
+                <p class="mt-6 text-center text-gray-700">هر مسافر فقط مجاز به حمل یک کیسه است. داروها و غذای کودک استثناء هستند.</p>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h3 class="text-2xl font-bold mb-4 text-center text-gray-800">مقررات باتری‌های لیتیومی</h3>
+                <p class="text-center text-gray-600 mb-6">به دلیل خطر آتش‌سوزی، باتری‌ها به شدت کنترل می‌شوند. قانون کلیدی: باتری‌های یدکی و پاوربانک‌ها <span class="font-bold">فقط</span> در چمدان دستی مجاز هستند.</p>
+                 <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-right">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="p-3 font-bold">نوع باتری/دستگاه</th>
+                                <th class="p-3 font-bold">ظرفیت (Wh)</th>
+                                <th class="p-3 font-bold text-center">چمدان دستی</th>
+                                <th class="p-3 font-bold text-center">چمدان تحویلی</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b">
+                                <td class="p-3">دستگاه‌ها (موبایل، لپ‌تاپ)</td>
+                                <td class="p-3">≤ 100</td>
+                                <td class="p-3 text-center text-green-600 font-bold text-2xl">✓</td>
+                                <td class="p-3 text-center text-green-600 font-bold text-2xl">✓¹</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3">دستگاه‌ها (تخصصی)</td>
+                                <td class="p-3">100-160</td>
+                                <td class="p-3 text-center text-yellow-500 font-bold text-2xl">?²</td>
+                                <td class="p-3 text-center text-yellow-500 font-bold text-2xl">?²</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3">باتری یدکی / پاوربانک</td>
+                                <td class="p-3">≤ 160</td>
+                                <td class="p-3 text-center text-green-600 font-bold text-2xl">✓</td>
+                                <td class="p-3 text-center text-red-600 font-bold text-2xl">✗</td>
+                            </tr>
+                             <tr class="bg-red-50">
+                                <td class="p-3 font-bold">دستگاه خودبالانس (هاوربرد)</td>
+                                <td class="p-3">هر ظرفیتی</td>
+                                <td class="p-3 text-center text-red-600 font-bold text-2xl">✗</td>
+                                <td class="p-3 text-center text-red-600 font-bold text-2xl">✗</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-xs text-gray-500 mt-4">¹ باید خاموش و محافظت شده باشد. ² نیاز به تأیید ایرلاین دارد. ✗ مطلقاً ممنوع.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="country-specifics" class="mb-20">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl font-bold text-gray-900">مقایسه قوانین گمرکی کشورها</h2>
+            <p class="text-gray-600 mt-2">فراتر از امنیت پرواز، هر کشور قوانین ورود و خروج خاص خود را دارد. در صورت شک، همیشه کالا را اظهار کنید.</p>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-10">
+            <h3 class="text-2xl font-bold mb-6 text-center text-gray-800">آستانه اظهار ارز (پول نقد)</h3>
+            <p class="text-center text-gray-600 mb-6">مبالغ بیشتر از این حدود باید هنگام ورود یا خروج به گمرک اظهار شوند.</p>
+            <div class="chart-container h-[30vh] md:h-[40vh]">
+                <canvas id="currencyChart"></canvas>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 rtl-grid">
+            <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col">
+                <h3 class="text-2xl font-bold mb-4 border-b-4 border-red-500 pb-2">🇮🇷 ایران</h3>
+                <p class="text-gray-600 mb-4 text-sm"> تمرکز بر حفاظت از میراث فرهنگی و رعایت شئونات اسلامی.</p>
+                <ul class="space-y-3 text-gray-700 flex-grow">
+                    <li class="flex items-start"><span class="ml-3 text-red-500">⛔</span><div><span class="font-bold">ممنوعات خروج:</span> آثار هنری و عتیقه، کتب خطی، سکه طلا، سرکه و ترشیجات.</div></li>
+                    <li class="flex items-start"><span class="ml-3 text-red-500">⛔</span><div><span class="font-bold">ممنوعات ورود:</span> نشریات و فیلم‌های مغایر شئونات، ابزار قمار.</div></li>
+                    <li class="flex items-start"><span class="ml-3 text-yellow-500">⚠️</span><div><span class="font-bold">محدودیت خروج:</span> خاویار (تا ۱۲۵ گرم)، زعفران، پسته و فرش (محدودیت مقداری).</div></li>
+                     <li class="flex items-start"><span class="ml-3 text-yellow-500">⚠️</span><div><span class="font-bold">نکته پروازی:</span> غذاهای اسیدی (آبلیمو، ترشی) به دلیل خطر انبساط، در هیچ چمدانی مجاز نیستند.</div></li>
+                </ul>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col">
+                <h3 class="text-2xl font-bold mb-4 border-b-4 border-blue-500 pb-2">🇪🇺 ایتالیا و آلمان</h3>
+                <p class="text-gray-600 mb-4 text-sm">پیروی از قوانین اتحادیه اروپا با تأکید بر ایمنی غذا و میراث فرهنگی.</p>
+                 <ul class="space-y-3 text-gray-700 flex-grow">
+                    <li class="flex items-start"><span class="ml-3 text-red-500">⛔</span><div><span class="font-bold">ممنوعات ورود:</span> محصولات گوشتی و لبنی از خارج از اتحادیه اروپا.</div></li>
+                    <li class="flex items-start"><span class="ml-3 text-red-500">⛔</span><div><span class="font-bold">ممنوعات خروج (ایتالیا):</span> آثار هنری و عتیقه بدون مجوز وزارت فرهنگ.</div></li>
+                    <li class="flex items-start"><span class="ml-3 text-yellow-500">⚠️</span><div><span class="font-bold">محدودیت ورود:</span> حیوانات خانگی، کالاهای فرهنگی و گونه‌های در معرض خطر نیاز به مجوز و گواهی دارند.</div></li>
+                    <li class="flex items-start"><span class="ml-3 text-yellow-500">⚠️</span><div><span class="font-bold">نکته پروازی (آلمان):</span> فندک و کبریت فقط روی شخص مجاز است، نه در چمدان.</div></li>
+                </ul>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col">
+                <h3 class="text-2xl font-bold mb-4 border-b-4 border-yellow-500 pb-2">🇹🇷 ترکیه</h3>
+                <p class="text-gray-600 mb-4 text-sm">همسو با استانداردهای اروپایی با قوانین خاص در مورد حیات وحش.</p>
+                 <ul class="space-y-3 text-gray-700 flex-grow">
+                    <li class="flex items-start"><span class="ml-3 text-red-500">⛔</span><div><span class="font-bold">ممنوعات ورود/خروج:</span> محصولات حیوانی که از طریق شکار به دست آمده‌اند.</div></li>
+                     <li class="flex items-start"><span class="ml-3 text-red-500">⛔</span><div><span class="font-bold">ممنوعیت خاص:</span> دستگاه‌های خودبالانس (هاوربرد) حتی با باتری جدا شده.</div></li>
+                    <li class="flex items-start"><span class="ml-3 text-yellow-500">⚠️</span><div><span class="font-bold">ترانزیت:</span> حمل کیسه‌های پلاستیکی هنگام سفر به کشورهایی مانند کنیا و تانزانیا ممنوع است.</div></li>
+                     <li class="flex items-start"><span class="ml-3 text-yellow-500">⚠️</span><div><span class="font-bold">نکته پروازی:</span> سیگارهای الکترونیکی هرگز در چمدان تحویلی مجاز نیستند.</div></li>
+                </ul>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col">
+                <h3 class="text-2xl font-bold mb-4 border-b-4 border-red-600 pb-2">🇨🇦 کانادا</h3>
+                <p class="text-gray-600 mb-4 text-sm">قوانین بسیار سخت‌گیرانه برای حفاظت از اکوسیستم و کشاورزی.</p>
+                 <ul class="space-y-3 text-gray-700 flex-grow">
+                    <li class="flex items-start"><span class="ml-3 text-red-500">⛔</span><div><span class="font-bold">ممنوعیت اکید:</span> هرگونه غذا، گیاه، حیوان و محصولات مرتبط (میوه، سبزیجات، گوشت، خاک، بذر) بدون مجوز.</div></li>
+                    <li class="flex items-start"><span class="ml-3 text-red-500">⛔</span><div><span class="font-bold">ممنوعیت:</span> هیزم و کالاهای آلوده به خاک (مانند چکمه‌های کوهنوردی کثیف).</div></li>
+                    <li class="flex items-start"><span class="ml-3 text-yellow-500">⚠️</span><div><span class="font-bold">الزام به اظهار:</span> تمامی کالاها، هدایا و خریدها باید اظهار شوند. عدم اظهار منجر به جریمه و مصادره می‌شود.</div></li>
+                     <li class="flex items-start"><span class="ml-3 text-yellow-500">⚠️</span><div><span class="font-bold">داروها:</span> ممکن است به نسخه نیاز داشته باشند حتی اگر در کشور شما بدون نسخه باشند.</div></li>
+                </ul>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col">
+                <h3 class="text-2xl font-bold mb-4 border-b-4 border-indigo-600 pb-2">🇺🇸 آمریکا</h3>
+                <p class="text-gray-600 mb-4 text-sm">قوانین سخت‌گیرانه گمرکی (CBP) و امنیت پرواز (TSA).</p>
+                <ul class="space-y-3 text-gray-700 flex-grow">
+                    <li class="flex items-start"><span class="ml-3 text-red-500">⛔</span><div><span class="font-bold">ممنوعیت اکید:</span> مواد مخدر (شامل ماری‌جوانا)، محصولات کشاورزی (گوشت، میوه و سبزیجات خاص)، سیگار برگ کوبایی.</div></li>
+                    <li class="flex items-start"><span class="ml-3 text-red-500">⛔</span><div><span class="font-bold">ممنوعیت:</span> کالاهای تقلبی ( برندهای پوشاک، فیلم)، عاج فیل و محصولات حیات وحش در معرض خطر.</div></li>
+                    <li class="flex items-start"><span class="ml-3 text-yellow-500">⚠️</span><div><span class="font-bold">الزام به اظهار:</span> گوشت پخته و کنسروی، محصولات لبنی، گیاهان و بذرها باید اظهار شوند.</div></li>
+                    <li class="flex items-start"><span class="ml-3 text-yellow-500">⚠️</span><div><span class="font-bold">الکل:</span> الکل بالای 70% (140 Proof) مطلقاً ممنوع است.</div></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-center mt-20 pt-10 border-t-2 border-gray-200">
+        <h2 class="text-2xl font-bold text-gray-900">چک‌لیست نهایی برای سفری هوشمند</h2>
+        <div class="max-w-md mx-auto mt-6 text-right">
+            <ul class="space-y-3">
+                <li class="flex items-center bg-white p-4 rounded-lg shadow-sm"><span class="text-2xl ml-4">🌐</span><div><span class="font-bold">قوانین ایرلاین را چک کنید:</span> همیشه وب‌سایت رسمی ایرلاین خود را برای آخرین به‌روزرسانی‌ها بررسی کنید.</div></li>
+                <li class="flex items-center bg-white p-4 rounded-lg shadow-sm"><span class="text-2xl ml-4">🏛️</span><div><span class="font-bold">قوانین گمرک را چک کنید:</span> به وب‌سایت سفارت یا کنسولگری کشور مقصد مراجعه نمایید.</div></li>
+                <li class="flex items-center bg-white p-4 rounded-lg shadow-sm"><span class="text-2xl ml-4">🧳</span><div><span class="font-bold">هوشمندانه بسته‌بندی کنید:</span> مایعات و باتری‌های یدکی در چمدان دستی؛ اشیاء تیز در چمدان تحویلی.</div></li>
+                <li class="flex items-center bg-white p-4 rounded-lg shadow-sm"><span class="text-2xl ml-4">📣</span><div><span class="font-bold">در صورت شک، اظهار کنید:</span> پنهان‌کاری اغلب جریمه سنگین‌تری نسبت به خود کالا دارد.</div></li>
+            </ul>
+        </div>
+        <p class="mt-10 text-sm text-gray-500">این اطلاعات بر اساس داده‌های موجود گردآوری شده و ممکن است تغییر کند. مسئولیت نهایی با مسافر است.</p>
+    </footer>
+
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        const wrapLabel = (str, maxLen) => {
+            if (str.length <= maxLen) {
+                return str;
+            }
+            const words = str.split(' ');
+            const lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + ' ' + word).length > maxLen && currentLine.length > 0) {
+                    lines.push(currentLine);
+                    currentLine = word;
+                } else {
+                    if (currentLine.length > 0) {
+                        currentLine += ' ' + word;
+                    } else {
+                        currentLine = word;
+                    }
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        };
+        
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+              return label.join(' ');
+            }
+            return label;
+        };
+        
+        const brilliantBlues = ['#003f5c', '#7a5195', '#ef5675', '#ffa600', '#374c80', '#bc5090'];
+
+        const ctxCurrency = document.getElementById('currencyChart')?.getContext('2d');
+        if (ctxCurrency) {
+            new Chart(ctxCurrency, {
+                type: 'bar',
+                data: {
+                    labels: ['ایران (خروج)', 'اتحادیه اروپا (ورود/خروج)', ['کانادا', '(ورود/خروج)'], ['آمریکا', '(ورود/خروج)']],
+                    datasets: [{
+                        label: 'آستانه اظهار ارز (به یورو - تقریبی)',
+                        data: [5000, 10000, 6800, 9300],
+                        backgroundColor: [brilliantBlues[2], brilliantBlues[0], brilliantBlues[4], brilliantBlues[5]],
+                        borderColor: '#ffffff',
+                        borderWidth: 2,
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            rtl: true,
+                            textDirection: 'rtl',
+                            callbacks: {
+                                title: tooltipTitleCallback,
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.x !== null) {
+                                        label += new Intl.NumberFormat('fa-IR', { style: 'currency', currency: 'EUR', minimumFractionDigits: 0 }).format(context.parsed.x);
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            ticks: {
+                                font: {
+                                    family: "'Vazirmatn', sans-serif"
+                                },
+                                callback: function(value, index, values) {
+                                    return new Intl.NumberFormat('fa-IR').format(value) + ' €';
+                                }
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                font: {
+                                    family: "'Vazirmatn', sans-serif",
+                                    size: 14
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    });
+</script>
+
+</body\>
+</html\>
