@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl"> <!-- Added dir="rtl" for consistency -->
+<html lang="fa" dir="rtl"> 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,11 +13,10 @@
     <!-- Telegram Web App Script -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        /* Base styles matching the infographic */
         body {
             font-family: 'Vazirmatn', sans-serif;
-            background-color: #023047; /* Dark background matching infographic */
-            color: #CAF0F8; /* Light text color matching infographic */
+            background-color: #023047; 
+            color: #CAF0F8; 
             text-align: center;
             padding: 20px;
             display: flex;
@@ -28,13 +27,12 @@
             margin: 0;
             box-sizing: border-box;
         }
-        /* Container styles adapted from infographic card */
-        .menu-container { /* Renamed from .container to avoid conflict with Tailwind's .container */
-            background-color: #0077B6; /* Card background color from infographic */
-            border: 1px solid #00B4D8; /* Card border from infographic */
+        .menu-container { 
+            background-color: #0077B6; 
+            border: 1px solid #00B4D8; 
             padding: 20px;
-            border-radius: 12px; /* Rounded corners from infographic */
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Enhanced shadow */
+            border-radius: 12px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); 
             max-width: 550px;
             width: 95%;
             margin-top: 20px;
@@ -42,16 +40,15 @@
             flex-direction: column;
             gap: 10px;
         }
-        /* Heading styles matching infographic */
         h1, h2, h3 {
-            font-weight: 900; /* Bold font from infographic */
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* Text shadow from infographic */
-            color: #CAF0F8; /* Light text color for headings */
+            font-weight: 900; 
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2); 
+            color: #CAF0F8; 
         }
         h1 {
-            font-size: 1.8em; /* Original size */
+            font-size: 1.8em; 
             margin-bottom: 20px;
-            color: #90E0EF; /* Lighter blue for main title */
+            color: #90E0EF; 
         }
         .user-profile {
             margin-bottom: 20px;
@@ -65,12 +62,12 @@
             height: 80px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #00B4D8; /* Border color matching infographic */
+            border: 3px solid #00B4D8; 
         }
         .user-profile p {
             font-size: 1.1em;
             font-weight: bold;
-            color: #CAF0F8; /* Text color matching infographic */
+            color: #CAF0F8; 
             margin: 0;
         }
         .button-row {
@@ -80,45 +77,50 @@
             gap: 10px;
             width: 100%;
         }
-        /* Main menu button styling derived from infographic's generate scenario button */
         .main-menu-button {
-            background-color: #00B4D8; /* Light blue from infographic */
-            color: #023047; /* Dark text for contrast */
+            background-color: #00B4D8; 
+            color: #023047; 
             border: none;
             padding: 12px 15px;
-            border-radius: 8px; /* Rounded corners */
+            border-radius: 8px; 
             font-size: 1em;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease; /* Added transform for hover effect */
+            transition: background-color 0.3s ease, transform 0.2s ease; 
             text-decoration: none;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-grow: 1;
             min-width: 120px;
-            max-width: 48%; /* For two columns */
+            max-width: 48%; 
             box-sizing: border-box;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            font-weight: bold; /* Make button text bold */
+            font-weight: bold; 
         }
         .main-menu-button:hover {
-            background-color: #90E0EF; /* Slightly lighter on hover */
-            transform: translateY(-2px); /* Slight lift on hover */
-            opacity: 1; /* Ensure opacity is full on hover */
+            background-color: #90E0EF; 
+            transform: translateY(-2px); 
+            opacity: 1; 
         }
         .button-row .main-menu-button.full-width {
-            max-width: 100%; /* For full width buttons */
+            max-width: 100%; 
         }
-        /* Callback button styling - slightly different from main but still thematic */
         .callback-button {
-            background-color: #0077B6; /* A slightly darker blue from infographic */
-            color: #CAF0F8; /* Light text for contrast */
-            border: 1px solid #00B4D8; /* Border from infographic */
+            background-color: #0077B6; 
+            color: #CAF0F8; 
+            border: 1px solid #00B4D8; 
         }
         .callback-button:hover {
-            background-color: #005A8D; /* Darker blue on hover */
+            background-color: #005A8D; 
+        }
+        .creative-button { /* استایل برای دکمه جدید و خلاقانه */
+            background-color: #FFBF00; /* رنگ طلایی یا کهربایی */
+            color: #023047; /* متن تیره برای کنتراست */
+        }
+        .creative-button:hover {
+            background-color: #FFD700; /* رنگ طلایی روشن‌تر در هاور */
         }
     </style>
 </head>
@@ -126,10 +128,10 @@
     <div class="menu-container">
         <h1>منوی اصلی</h1>
         <div class="user-profile">
-            <img id="userProfilePic" src="https://placehold.co/80x80/0077B6/FFFFFF?text=User" alt="عکس پروفایل"> <!-- Placeholder matching theme -->
+            <img id="userProfilePic" src="https://placehold.co/80x80/0077B6/FFFFFF?text=User" alt="عکس پروفایل"> 
             <p id="userNameDisplay">کاربر تلگرام</p>
         </div>
-        <p class="text-cyan-200">لطفاً یکی از گزینه‌های زیر را انتخاب کنید:</p> <!-- Applied text color from infographic -->
+        <p class="text-cyan-200">لطفاً یکی از گزینه‌های زیر را انتخاب کنید:</p>
         <div class="button-row">
             <a href="https://t.me/koolbar_international" class="main-menu-button" data-type="url">درآمد مسافری</a>
             <button class="main-menu-button callback-button" data-type="callback" data-callback="wikibutton">مفید</button>
@@ -152,6 +154,10 @@
             <button class="main-menu-button callback-button" data-type="callback" data-callback="lastsecondbutt">بلیط لحظه آخری</button>
             <button class="main-menu-button callback-button" data-type="callback" data-callback="country">گذرنامه</button>
         </div>
+         <!-- دکمه جدید و خلاقانه -->
+        <div class="button-row">
+            <a href="airlinesinfo.html" class="main-menu-button full-width creative-button" data-type="url">✨ شگفتی‌های هوانوردی ✨</a>
+        </div>
         <div class="button-row">
             <button class="main-menu-button callback-button full-width" data-type="callback" data-callback="aboutus">تماس با ما</button>
         </div>
@@ -164,24 +170,20 @@
         </div>
     </div>
     <script>
-        // Initialize Telegram Web App
         Telegram.WebApp.ready();
         Telegram.WebApp.setHeaderColor('secondary_bg_color');
         Telegram.WebApp.setBackgroundColor('bg_color');
         Telegram.WebApp.expand();
 
-        // Configure Main Button
         Telegram.WebApp.MainButton.setText("بازگشت به ربات");
         Telegram.WebApp.MainButton.show();
         Telegram.WebApp.MainButton.onClick(function() {
             Telegram.WebApp.close();
         });
 
-        // Apply Telegram theme parameters to CSS variables
         const applyThemeParams = () => {
             const themeParams = Telegram.WebApp.themeParams;
             if (themeParams) {
-                // Set CSS custom properties based on Telegram theme, with fallbacks
                 document.documentElement.style.setProperty('--tg-theme-bg-color', themeParams.bg_color || '#f4f4f4');
                 document.documentElement.style.setProperty('--tg-theme-text-color', themeParams.text_color || '#333');
                 document.documentElement.style.setProperty('--tg-theme-hint-color', themeParams.hint_color || '#aaa');
@@ -191,10 +193,9 @@
                 document.documentElement.style.setProperty('--tg-theme-secondary-bg-color', themeParams.secondary_bg_color || '#ffffff');
             }
         };
-        applyThemeParams(); // Apply theme on initial load
-        Telegram.WebApp.onEvent('themeChanged', applyThemeParams); // Listen for theme changes
+        applyThemeParams();
+        Telegram.WebApp.onEvent('themeChanged', applyThemeParams);
 
-        // Display user profile information
         const userProfilePic = document.getElementById('userProfilePic');
         const userNameDisplay = document.getElementById('userNameDisplay');
         const initData = Telegram.WebApp.initDataUnsafe;
@@ -215,35 +216,32 @@
                 userProfilePic.src = user.photo_url;
                 userProfilePic.style.display = 'block';
             } else {
-                userProfilePic.style.display = 'none';
+                userProfilePic.style.display = 'none'; 
             }
         } else {
             userNameDisplay.textContent = "کاربر ناشناس";
             userProfilePic.style.display = 'none';
         }
 
-        // Add event listeners to buttons
         document.querySelectorAll('.main-menu-button').forEach(button => {
             button.addEventListener('click', function(event) {
                 const type = this.dataset.type;
                 if (type === 'url') {
-                    event.preventDefault(); // Prevent default link behavior
+                    event.preventDefault(); 
                     const url = this.href;
                     if (Telegram.WebApp.openLink) {
-                        Telegram.WebApp.openLink(url); // Use Telegram's openLink
+                        Telegram.WebApp.openLink(url); 
                     } else {
-                        window.open(url, '_blank'); // Fallback for regular browser
+                        window.open(url, '_blank'); 
                     }
                 } else if (type === 'callback') {
                     const callbackData = this.dataset.callback;
-                    // Send data back to the Telegram bot
                     Telegram.WebApp.sendData(JSON.stringify({ action: 'web_app_callback', data: callbackData }));
-                    Telegram.WebApp.close(); // Close the Web App
+                    Telegram.WebApp.close(); 
                 } else if (type === 'send_time') {
                     const callbackData = this.dataset.callback;
-                    // Send current time data back to the Telegram bot
                     Telegram.WebApp.sendData(JSON.stringify({ action: 'send_current_time', data: callbackData }));
-                    Telegram.WebApp.close(); // Close the Web App
+                    Telegram.WebApp.close(); 
                 }
             });
         });
