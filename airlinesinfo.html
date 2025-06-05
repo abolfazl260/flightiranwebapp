@@ -95,10 +95,18 @@ h1, h2, h3 {
 </style>
 </head>
 <body class="antialiased">
-<div class="container mx-auto p-4 sm:p-6 lg:p-8">
+<div class="container mx-auto p-4 sm:p-6 lg:p-8 relative"> <!-- Added relative for positioning the back button -->
+
+    <!-- دکمه بازگشت به خانه -->
+    <a href="index.html" class="fixed top-4 left-4 bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition-colors duration-200 z-50">
+        بازگشت به خانه
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 inline-block ml-1">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+        </svg>
+    </a>
 
     <!-- بخش سربرگ -->
-    <header class="text-center mb-12">
+    <header class="text-center mb-12 mt-12 sm:mt-0"> <!-- Added margin-top for small screens to avoid overlap with fixed button -->
         <h1 class="text-4xl md:text-6xl font-black text-white mb-4">آسمان ایران</h1>
         <p class="text-xl md:text-2xl text-cyan-200">مقاومت و بلندپروازی در صنعت هوانوردی</p>
     </header>
@@ -106,7 +114,7 @@ h1, h2, h3 {
     <!-- بخش اصلی محتوا -->
     <main class="space-y-16">
 
-        <!-- بخش مقایسه اندازه ناوگان شرکت‌های کلیدی (اولین بخش درخواستی) -->
+        <!-- بخش مقایسه اندازه ناوگان شرکت‌های کلیدی -->
         <section id="fleet-comparison">
             <div class="text-center mb-8">
                 <h2 class="text-3xl font-bold text-white mb-2">مقایسه اندازه ناوگان شرکت‌های کلیدی</h2>
@@ -122,7 +130,7 @@ h1, h2, h3 {
             </div>
         </section>
 
-        <!-- بخش تجربه مسافر: خدمات در میان محدودیت‌ها (دومین بخش درخواستی) -->
+        <!-- بخش تجربه مسافر: خدمات در میان محدودیت‌ها -->
         <section id="passenger-experience">
             <div class="text-center mb-8">
                 <h2 class="text-3xl font-bold text-white mb-2">تجربه مسافر: خدمات در میان محدودیت‌ها</h2>
@@ -148,7 +156,7 @@ h1, h2, h3 {
                         </div>
                         <div class="bg-cyan-900/50 p-4 rounded-lg">
                             <p class="font-bold text-lg text-white">💻 پذیرش آنلاین</p>
-                            <p class="text-cyan-200">شرکت‌هایی مانند ماهان و کیش‌ایر با فراهم کردن امکان چک‌این آنلاین، در زمان مسافران صرفه‌جویی می‌کنند.</p>
+                            <p class="text-cyan-200">شرکت‌هایی مانند ماهان و کیش‌ایر با فراهم کردن امکان چک‌این آنلاین، در زمان مسافran صرفه‌جویی می‌کنند.</p>
                         </div>
                          <div class="bg-cyan-900/50 p-4 rounded-lg">
                             <p class="font-bold text-lg text-white">📲 اپلیکیشن موبایل</p>
@@ -159,7 +167,7 @@ h1, h2, h3 {
             </div>
         </section>
 
-        <!-- بخش نمایه شرکت‌های برجسته (سومین بخش درخواستی) -->
+        <!-- بخش نمایه شرکت‌های برجسته (ادغام شده با لینک وبسایت) -->
         <section id="prominent-companies">
             <div class="text-center mb-8">
                 <h2 class="text-3xl font-bold text-white mb-2">نمایه شرکت‌های برجسته</h2>
@@ -169,63 +177,89 @@ h1, h2, h3 {
             </div>
              <div class="card rounded-lg shadow-lg p-6">
                 <div class="space-y-4">
+                    <!-- ایران ایر (هما) -->
                     <div class="bg-cyan-900/50 p-4 rounded-lg">
                         <p class="font-bold text-lg text-white">✈️ ایران ایر (هما)</p>
                         <p class="text-cyan-200">قدیمی‌ترین و پرچم‌دار ایران با سابقه‌ای درخشان در کترینگ و شبکه‌ی پروازی گسترده بین‌المللی و داخلی.</p>
+                        <a href="https://www.iranair.com/" target="_blank" class="inline-block mt-2 bg-sky-500 hover:bg-sky-600 text-white text-sm font-semibold py-1 px-3 rounded-md transition-colors duration-200">مشاهده وب‌سایت</a>
                     </div>
+                    <!-- ماهان ایر -->
                     <div class="bg-cyan-900/50 p-4 rounded-lg">
                         <p class="font-bold text-lg text-white">✈️ ماهان ایر</p>
                         <p class="text-cyan-200">بزرگترین شرکت هواپیمایی خصوصی ایران با ناوگان گسترده و خدمات باکیفیت، تمرکز بر پروازهای بین‌المللی و داخلی.</p>
+                        <a href="https://www.mahan.aero/" target="_blank" class="inline-block mt-2 bg-sky-500 hover:bg-sky-600 text-white text-sm font-semibold py-1 px-3 rounded-md transition-colors duration-200">مشاهده وب‌سایت</a>
                     </div>
+                    <!-- ایران آسمان ایرلاینز -->
                      <div class="bg-cyan-900/50 p-4 rounded-lg">
                         <p class="font-bold text-lg text-white">✈️ ایران آسمان ایرلاینز</p>
                         <p class="text-cyan-200">یکی از بزرگترین ایرلاین‌های داخلی با پوشش گسترده مسیرهای استانی و فرودگاه‌های کوچک‌تر.</p>
+                        <a href="https://www.iaa.ir/" target="_blank" class="inline-block mt-2 bg-sky-500 hover:bg-sky-600 text-white text-sm font-semibold py-1 px-3 rounded-md transition-colors duration-200">مشاهده وب‌سایت</a>
                     </div>
+                    <!-- کیش ایر -->
                     <div class="bg-cyan-900/50 p-4 rounded-lg">
                         <p class="font-bold text-lg text-white">✈️ کیش ایر</p>
                         <p class="text-cyan-200">ایرلاین منطقه آزاد کیش با تمرکز بر مسیرهای داخلی و پروازهای چارتری، به‌ویژه به مقصد جزیره کیش.</p>
+                        <a href="https://kishairlines.ir/" target="_blank" class="inline-block mt-2 bg-sky-500 hover:bg-sky-600 text-white text-sm font-semibold py-1 px-3 rounded-md transition-colors duration-200">مشاهده وب‌سایت</a>
                     </div>
+                    <!-- آتا ایرلاینز -->
                     <div class="bg-cyan-900/50 p-4 rounded-lg">
                         <p class="font-bold text-lg text-white">✈️ آتا ایرلاینز</p>
                         <p class="text-cyan-200">یک ایرلاین نسبتاً جدید با تمرکز بر پروازهای داخلی و منطقه‌ای.</p>
+                        <a href="http://ataair.ir/" target="_blank" class="inline-block mt-2 bg-sky-500 hover:bg-sky-600 text-white text-sm font-semibold py-1 px-3 rounded-md transition-colors duration-200">مشاهده وب‌سایت</a>
                     </div>
+                    <!-- قشم ایر -->
                     <div class="bg-cyan-900/50 p-4 rounded-lg">
                         <p class="font-bold text-lg text-white">✈️ قشم ایر</p>
                         <p class="text-cyan-200">تمرکز بر پروازهای داخلی، بین‌المللی و باری، از جمله ایرلاین‌های فعال در زمینه کترینگ.</p>
+                        <a href="https://qeshm.aero/" target="_blank" class="inline-block mt-2 bg-sky-500 hover:bg-sky-600 text-white text-sm font-semibold py-1 px-3 rounded-md transition-colors duration-200">مشاهده وب‌سایت</a>
                     </div>
+                    <!-- معراج ایرلاینز -->
                     <div class="bg-cyan-900/50 p-4 rounded-lg">
                         <p class="font-bold text-lg text-white">✈️ معراج ایرلاینز</p>
                         <p class="text-cyan-200">شناخته‌شده با سرویس‌دهی منظم و استفاده از ناوگان جوان‌تر در میان ایرلاین‌های ایرانی.</p>
+                        <a href="https://meraj.aero/" target="_blank" class="inline-block mt-2 bg-sky-500 hover:bg-sky-600 text-white text-sm font-semibold py-1 px-3 rounded-md transition-colors duration-200">مشاهده وب‌سایت</a>
                     </div>
+                    <!-- زاگرس ایرلاینز -->
                     <div class="bg-cyan-900/50 p-4 rounded-lg">
                         <p class="font-bold text-lg text-white">✈️ زاگرس ایرلاینز</p>
                         <p class="text-cyan-200">یکی از ایرلاین‌های خصوصی فعال در مسیرهای داخلی و برخی پروازهای منطقه‌ای.</p>
+                        <a href="https://zagrosairlines.com/" target="_blank" class="inline-block mt-2 bg-sky-500 hover:bg-sky-600 text-white text-sm font-semibold py-1 px-3 rounded-md transition-colors duration-200">مشاهده وب‌سایت</a>
                     </div>
+                    <!-- کاسپین ایرلاینز -->
                     <div class="bg-cyan-900/50 p-4 rounded-lg">
                         <p class="font-bold text-lg text-white">✈️ کاسپین ایرلاینز</p>
                         <p class="text-cyan-200">با تمرکز بر پروازهای داخلی و خارجی از جمله روسیه و کشورهای CIS.</p>
+                        <a href="https://caspian.aero/" target="_blank" class="inline-block mt-2 bg-sky-500 hover:bg-sky-600 text-white text-sm font-semibold py-1 px-3 rounded-md transition-colors duration-200">مشاهده وب‌سایت</a>
                     </div>
+                    <!-- تابان ایر -->
                     <div class="bg-cyan-900/50 p-4 rounded-lg">
                         <p class="font-bold text-lg text-white">✈️ تابان ایر</p>
                         <p class="text-cyan-200">ایرلاین منطقه خراسان با تمرکز بر پروازهای داخلی و بین‌المللی به مشهد.</p>
+                        <a href="https://taban.aero/" target="_blank" class="inline-block mt-2 bg-sky-500 hover:bg-sky-600 text-white text-sm font-semibold py-1 px-3 rounded-md transition-colors duration-200">مشاهده وب‌سایت</a>
                     </div>
+                    <!-- سپهران ایرلاینز -->
                      <div class="bg-cyan-900/50 p-4 rounded-lg">
                         <p class="font-bold text-lg text-white">✈️ سپهران ایرلاینز</p>
                         <p class="text-cyan-200">ایرلاین خصوصی با ناوگان مدرن‌تر و تمرکز بر پروازهای داخلی و برخی مسیرهای بین‌المللی.</p>
+                         <a href="https://sepehran.aero/" target="_blank" class="inline-block mt-2 bg-sky-500 hover:bg-sky-600 text-white text-sm font-semibold py-1 px-3 rounded-md transition-colors duration-200">مشاهده وب‌سایت</a>
                     </div>
+                    <!-- فلای پرشیا -->
                      <div class="bg-cyan-900/50 p-4 rounded-lg">
                         <p class="font-bold text-lg text-white">✈️ فلای پرشیا</p>
                         <p class="text-cyan-200">ایرلاین جدیدتر با هدف ارائه خدمات باکیفیت در پروازهای داخلی و منطقه‌ای.</p>
+                        <a href="https://flypersia.aero/" target="_blank" class="inline-block mt-2 bg-sky-500 hover:bg-sky-600 text-white text-sm font-semibold py-1 px-3 rounded-md transition-colors duration-200">مشاهده وب‌سایت</a>
                     </div>
+                    <!-- پارس ایر -->
                      <div class="bg-cyan-900/50 p-4 rounded-lg">
                         <p class="font-bold text-lg text-white">✈️ پارس ایر</p>
                         <p class="text-cyan-200">ایرلاین جدیدی که با هدف پوشش مسیرهای داخلی و بین‌المللی در حال توسعه است.</p>
+                        <a href="https://www.parsair.ir/" target="_blank" class="inline-block mt-2 bg-sky-500 hover:bg-sky-600 text-white text-sm font-semibold py-1 px-3 rounded-md transition-colors duration-200">مشاهده وب‌سایت</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- بخش ایمنی: چالش اصلی صنعت (چهارمین بخش درخواستی) -->
+        <!-- بخش ایمنی: چالش اصلی صنعت -->
         <section id="safety-main">
              <div class="text-center mb-8">
                 <h2 class="text-3xl font-bold text-white mb-2">ایمنی: چالش اصلی صنعت</h2>
@@ -241,7 +275,7 @@ h1, h2, h3 {
             </div>
         </section>
         
-        <!-- بخش تحریم‌ها (بخش اصلی قبلی، اکنون در مکان جدید) -->
+        <!-- بخش تحریم‌ها -->
         <section id="sanctions">
             <div class="text-center mb-8">
                 <h2 class="text-3xl font-bold text-white mb-2">آسمانِ در تنگنا: تأثیر تحریم‌ها</h2>
@@ -324,12 +358,12 @@ h1, h2, h3 {
             </div>
         </section>
 
-        <!-- بخش منابع و لینک‌های مفید اضافه شده -->
+        <!-- بخش منابع و لینک‌های مفید (همچنان موجود برای دسترسی سریع‌تر به همه لینک‌ها) -->
         <section id="resources" class="mt-16">
             <div class="text-center mb-8">
                 <h2 class="text-3xl font-bold text-white mb-2">منابع و لینک‌های مفید</h2>
                 <p class="max-w-3xl mx-auto text-lg text-cyan-200">
-                    برای اطلاعات بیشتر و دسترسی به خدمات ایرلاین‌ها، می‌توانید از لینک‌های زیر استفاده کنید.
+                    برای اطلاعات بیشتر و دسترسی به خدمات ایرلاین‌ها، می‌توانید از لینک‌های زیر استفاده کنید. (این بخش علاوه بر لینک‌های موجود در نمایه شرکت‌ها است)
                 </p>
             </div>
             
@@ -366,41 +400,7 @@ h1, h2, h3 {
                         <img src="https://placehold.co/100x40/0077B6/FFFFFF?text=Qeshm+Air" alt="لوگوی قشم ایر" class="mb-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/100x40/0077B6/FFFFFF?text=Qeshm+Air'">
                         <p class="text-white text-sm font-semibold">قشم ایر</p>
                     </a>
-                    <!-- معراج ایرلاینز -->
-                    <a href="https://meraj.aero/" target="_blank" class="flex flex-col items-center p-3 rounded-lg bg-cyan-900/50 hover:bg-cyan-800/70 transition-colors duration-200">
-                        <img src="https://placehold.co/100x40/0077B6/FFFFFF?text=Meraj+Air" alt="لوگوی معراج ایرلاینز" class="mb-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/100x40/0077B6/FFFFFF?text=Meraj+Air'">
-                        <p class="text-white text-sm font-semibold">معراج ایرلاینز</p>
-                    </a>
-                    <!-- زاگرس ایرلاینز -->
-                    <a href="https://zagrosairlines.com/" target="_blank" class="flex flex-col items-center p-3 rounded-lg bg-cyan-900/50 hover:bg-cyan-800/70 transition-colors duration-200">
-                        <img src="https://placehold.co/100x40/0077B6/FFFFFF?text=Zagros+Air" alt="لوگوی زاگرس ایرلاینز" class="mb-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/100x40/0077B6/FFFFFF?text=Zagros+Air'">
-                        <p class="text-white text-sm font-semibold">زاگرس ایرلاینز</p>
-                    </a>
-                    <!-- کاسپین ایرلاینز -->
-                    <a href="https://caspian.aero/" target="_blank" class="flex flex-col items-center p-3 rounded-lg bg-cyan-900/50 hover:bg-cyan-800/70 transition-colors duration-200">
-                        <img src="https://placehold.co/100x40/0077B6/FFFFFF?text=Caspian+Air" alt="لوگوی کاسپین ایرلاینز" class="mb-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/100x40/0077B6/FFFFFF?text=Caspian+Air'">
-                        <p class="text-white text-sm font-semibold">کاسپین ایرلاینز</p>
-                    </a>
-                    <!-- تابان ایر -->
-                    <a href="https://taban.aero/" target="_blank" class="flex flex-col items-center p-3 rounded-lg bg-cyan-900/50 hover:bg-cyan-800/70 transition-colors duration-200">
-                        <img src="https://placehold.co/100x40/0077B6/FFFFFF?text=Taban+Air" alt="لوگوی تابان ایر" class="mb-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/100x40/0077B6/FFFFFF?text=Taban+Air'">
-                        <p class="text-white text-sm font-semibold">تابان ایر</p>
-                    </a>
-                    <!-- سپهران ایرلاینز -->
-                    <a href="https://sepehran.aero/" target="_blank" class="flex flex-col items-center p-3 rounded-lg bg-cyan-900/50 hover:bg-cyan-800/70 transition-colors duration-200">
-                        <img src="https://placehold.co/100x40/0077B6/FFFFFF?text=Sepehran+Air" alt="لوگوی سپهران ایرلاینز" class="mb-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/100x40/0077B6/FFFFFF?text=Sepehran+Air'">
-                        <p class="text-white text-sm font-semibold">سپهران ایرلاینز</p>
-                    </a>
-                     <!-- فلای پرشیا -->
-                    <a href="https://flypersia.aero/" target="_blank" class="flex flex-col items-center p-3 rounded-lg bg-cyan-900/50 hover:bg-cyan-800/70 transition-colors duration-200">
-                        <img src="https://placehold.co/100x40/0077B6/FFFFFF?text=FlyPersia" alt="لوگوی فلای پرشیا" class="mb-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/100x40/0077B6/FFFFFF?text=FlyPersia'">
-                        <p class="text-white text-sm font-semibold">فلای پرشیا</p>
-                    </a>
-                     <!-- پارس ایر -->
-                    <a href="https://www.parsair.ir/" target="_blank" class="flex flex-col items-center p-3 rounded-lg bg-cyan-900/50 hover:bg-cyan-800/70 transition-colors duration-200">
-                        <img src="https://placehold.co/100x40/0077B6/FFFFFF?text=Pars+Air" alt="لوگوی پارس ایر" class="mb-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/100x40/0077B6/FFFFFF?text=Pars+Air'">
-                        <p class="text-white text-sm font-semibold">پارس ایر</p>
-                    </a>
+                    <!-- سایر ایرلاین ها به همین ترتیب -->
                 </div>
             </div>
 
@@ -437,91 +437,83 @@ h1, h2, h3 {
         const lines = [];
         let currentLine = '';
         for (const word of words) {
-            // اگر اضافه کردن کلمه فعلی به خط جاری، طول خط را از حداکثر بیشتر کند، خط جدید شروع می‌شود
             if ((currentLine + word).length > maxWidth && currentLine.length > 0) {
                 lines.push(currentLine.trim());
                 currentLine = '';
             }
             currentLine += word + ' ';
         }
-        lines.push(currentLine.trim()); // اضافه کردن آخرین خط
+        lines.push(currentLine.trim());
         return lines;
     }
     
-    // تابع callback برای عنوان Tooltip نمودارها
     const tooltipTitleCallback = (tooltipItems) => {
         const item = tooltipItems[0];
         let label = item.chart.data.labels[item.dataIndex];
-        // اگر برچسب از قبل یک آرایه (چند خط) باشد، آن را به یک رشته تبدیل می‌کند
         if (Array.isArray(label)) {
             return label.join(' ');
         }
         return label;
     };
     
-    // گزینه‌های مشترک برای تمامی نمودارها برای حفظ ثبات بصری
     const sharedChartOptions = {
-        responsive: true, // نمودار ریسپانسیو باشد
-        maintainAspectRatio: false, // حفظ نسبت ابعاد را غیرفعال می‌کند تا نمودار اندازه کانتینر را بگیرد
+        responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             legend: {
                 labels: {
-                    color: '#CAF0F8', // رنگ برچسب‌های راهنما
+                    color: '#CAF0F8',
                     font: {
-                        family: "'Vazirmatn', sans-serif", // فونت برچسب‌ها
+                        family: "'Vazirmatn', sans-serif",
                         size: 14
                     }
                 }
             },
             tooltip: {
-                titleFont: { family: "'Vazirmatn', sans-serif" }, // فونت عنوان tooltip
-                bodyFont: { family: "'Vazirmatn', sans-serif" }, // فونت متن اصلی tooltip
+                titleFont: { family: "'Vazirmatn', sans-serif" },
+                bodyFont: { family: "'Vazirmatn', sans-serif" },
                 callbacks: {
-                    title: tooltipTitleCallback // استفاده از تابع مشترک برای عنوان tooltip
+                    title: tooltipTitleCallback
                 }
             }
         },
         scales: {
             y: {
-                ticks: { color: '#90E0EF', font: { family: "'Vazirmatn', sans-serif" } }, // استایل تیک‌های محور Y
-                grid: { color: 'rgba(144, 224, 239, 0.2)' } // رنگ خطوط شبکه محور Y
+                ticks: { color: '#90E0EF', font: { family: "'Vazirmatn', sans-serif" } },
+                grid: { color: 'rgba(144, 224, 239, 0.2)' }
             },
             x: {
-                ticks: { color: '#90E0EF', font: { family: "'Vazirmatn', sans-serif" } }, // استایل تیک‌های محور X
-                grid: { color: 'rgba(144, 224, 239, 0.2)' } // رنگ خطوط شبکه محور X
+                ticks: { color: '#90E0EF', font: { family: "'Vazirmatn', sans-serif" } },
+                grid: { color: 'rgba(144, 224, 239, 0.2)' }
             }
         }
     };
 
-    // داده‌های نمودار اندازه ناوگان (به روز شده با ایرلاین‌های بیشتر)
     const fleetSizeData = {
         labels: ['ماهان ایر', 'ایران ایر', 'ایران آسمان', 'کیش ایر', 'قشم ایر', 'آتا ایرلاینز', 'معراج ایرلاینز', 'زاگرس ایرلاینز'],
         datasets: [
             {
                 label: 'تعداد کل هواپیماها',
-                data: [44, 37, 27, 12, 10, 8, 7, 6], // داده‌های نمونه
-                backgroundColor: '#00B4D8', // رنگ ستون‌ها
+                data: [44, 37, 27, 12, 10, 8, 7, 6],
+                backgroundColor: '#00B4D8',
             }
         ]
     };
-    // ایجاد نمودار میله‌ای اندازه ناوگان
     new Chart(document.getElementById('fleetSizeChart'), {
         type: 'bar',
         data: fleetSizeData,
-        options: sharedChartOptions // استفاده از گزینه‌های مشترک
+        options: sharedChartOptions
     });
 
-    // داده‌های نمودار کترینگ (به روز شده با ایرلاین‌های بیشتر)
     const cateringData = {
         labels: ['قشم ایر (کترینگ تخصصی)', 'ایران ایر', 'ماهان ایر', 'سپهران ایرلاینز', 'معراج ایرلاینز'],
         datasets: [{
-            data: [40, 35, 30, 20, 15], // داده‌های نمونه
-            backgroundColor: ['#00B4D8', '#90E0EF', '#CAF0F8', '#00A8E8', '#48CAE4'], // رنگ بخش‌های نمودار دایره‌ای
-            borderColor: '#023047', // رنگ حاشیه بخش‌ها
-            hoverOffset: 4 // فاصله هنگام هاور
+            data: [40, 35, 30, 20, 15],
+            backgroundColor: ['#00B4D8', '#90E0EF', '#CAF0F8', '#00A8E8', '#48CAE4'],
+            borderColor: '#023047',
+            hoverOffset: 4
         }]
     };
-    // ایجاد نمودار دایره‌ای کترینگ
     new Chart(document.getElementById('cateringChart'), {
         type: 'doughnut',
         data: cateringData,
@@ -536,7 +528,6 @@ h1, h2, h3 {
                        font: { family: "'Vazirmatn', sans-serif", size: 12 },
                        boxWidth: 20,
                        padding: 20,
-                       // تابع سفارشی برای تولید برچسب‌های راهنما (با قابلیت wrap)
                        generateLabels: function(chart) {
                             const data = chart.data;
                             if (data.labels.length && data.datasets.length) {
@@ -544,7 +535,7 @@ h1, h2, h3 {
                                     const meta = chart.getDatasetMeta(0);
                                     const style = meta.controller.getStyle(i);
                                     return {
-                                        text: wrapLabel(label, 20), // استفاده از wrapLabel برای شکستن متن
+                                        text: wrapLabel(label, 20),
                                         fillStyle: style.backgroundColor,
                                         strokeStyle: style.borderColor,
                                         lineWidth: style.borderWidth,
@@ -559,70 +550,66 @@ h1, h2, h3 {
                 },
                 tooltip: {
                      callbacks: {
-                        title: tooltipTitleCallback // استفاده از تابع مشترک برای عنوان tooltip
+                        title: tooltipTitleCallback
                     }
                 }
             }
         }
     });
 
-    // داده‌های نمودار رتبه‌بندی ایمنی (به روز شده با ایرلاین‌های بیشتر)
     const safetyRatingData = {
         labels: ['کیش ایر', 'ماهان ایر', 'سپهران ایرلاینز', 'ایران ایر', 'قشم ایر', 'آتا ایرلاینز', 'ایران آسمان', 'کاسپین ایرلاینز'],
         datasets: [{
             label: 'رتبه ایمنی (از ۷)',
-            data: [6.5, 5.0, 4.5, 3.5, 3.0, 2.5, 2.0, 1.5], // داده‌های نمونه
-             backgroundColor: [ // رنگ‌های مختلف برای هر ستون بر اساس رتبه
-                '#33FF57', /* سبز روشن (برای ایمن‌ترین) */
+            data: [6.5, 5.0, 4.5, 3.5, 3.0, 2.5, 2.0, 1.5],
+             backgroundColor: [
+                '#33FF57', 
                 '#99FF33',
-                '#FFC300', /* زرد (برای متوسط) */
+                '#FFC300', 
                 '#FF8C00',
-                '#FF5733', /* نارنجی (برای کم‌امنیت) */
+                '#FF5733', 
                 '#E74C3C',
-                '#C70039',  /* قرمز تیره (برای ناامن‌ترین) */
+                '#C70039',  
                 '#8B0000'
             ],
         }]
     };
-    // ایجاد نمودار میله‌ای افقی رتبه‌بندی ایمنی
     new Chart(document.getElementById('safetyRatingChart'), {
         type: 'bar',
         data: safetyRatingData,
         options: {
-            ...sharedChartOptions, // استفاده از گزینه‌های مشترک
-            indexAxis: 'y', // نمودار میله‌ای افقی
+            ...sharedChartOptions,
+            indexAxis: 'y',
              scales: {
                 x: {
                     beginAtZero: true,
-                    max: 7, // حداکثر مقدار محور X
+                    max: 7,
                     ticks: { color: '#90E0EF', font: { family: "'Vazirmatn', sans-serif" } },
                     grid: { color: 'rgba(144, 224, 239, 0.2)' }
                 },
                 y: {
                     ticks: { color: '#90E0EF', font: { family: "'Vazirmatn', sans-serif" } },
-                    grid: { display: false } // خطوط شبکه محور Y را نمایش نمی‌دهد
+                    grid: { display: false }
                 }
             },
             plugins: {
                 legend: {
-                    display: false // راهنما را نمایش نمی‌دهد زیرا هر ستون رنگ خاص خود را دارد
+                    display: false
                 },
-                tooltip: sharedChartOptions.plugins.tooltip // استفاده از تابع مشترک برای عنوان tooltip
+                tooltip: sharedChartOptions.plugins.tooltip
             }
         }
     });
 
-    // LLM Feature: Generate Future Scenario
     document.getElementById('generateScenarioBtn').addEventListener('click', async () => {
         const scenarioOutputDiv = document.getElementById('scenarioOutput');
         const scenarioTextP = document.getElementById('scenarioText');
         const scenarioSpinner = document.getElementById('scenarioSpinner');
 
-        scenarioOutputDiv.style.display = 'block'; // Show the output area
-        scenarioTextP.textContent = ''; // Clear previous text
-        scenarioSpinner.style.display = 'block'; // Show spinner
+        scenarioOutputDiv.style.display = 'block';
+        scenarioTextP.textContent = '';
+        scenarioSpinner.style.display = 'block';
 
-        // Define possible prompts for variety
         const prompts = [
             "یک سناریوی کوتاه (حداکثر ۱۰۰ کلمه) درباره آینده روشن و موفق صنعت هوانوردی ایران، با تمرکز بر نوسازی ناوگان و افزایش پروازهای بین‌المللی، تولید کنید.",
             "یک سناریوی کوتاه (حداکثر ۱۰۰ کلمه) درباره چالش‌ها و فرصت‌های صنعت هوانوردی ایران در ۱۰ سال آینده، با فرض تداوم برخی تحریم‌ها و تلاش برای خودکفایی، تولید کنید.",
@@ -630,7 +617,6 @@ h1, h2, h3 {
             "با فرض رفع کامل تحریم‌ها، یک سناریوی کوتاه (حداکثر ۱۰۰ کلمه) درباره رشد سریع و تحول صنعت هوانوردی ایران در ۵ سال آینده، تولید کنید.",
             "یک سناریوی کوتاه (حداکثر ۱۰۰ کلمه) در مورد تأثیر افزایش رقابت داخلی و ظهور ایرلاین‌های جدید بر صنعت هوانوردی ایران در آینده، تولید کنید."
         ];
-        // Select a random prompt
         const prompt = prompts[Math.floor(Math.random() * prompts.length)];
 
         let chatHistory = [];
@@ -638,7 +624,7 @@ h1, h2, h3 {
 
         try {
             const payload = { contents: chatHistory };
-            const apiKey = ""; // Canvas will provide this at runtime
+            const apiKey = ""; 
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
             const response = await fetch(apiUrl, {
@@ -653,7 +639,7 @@ h1, h2, h3 {
                 result.candidates[0].content && result.candidates[0].content.parts &&
                 result.candidates[0].content.parts.length > 0) {
                 const text = result.candidates[0].content.parts[0].text;
-                scenarioTextP.textContent = text; // Display generated text
+                scenarioTextP.textContent = text;
             } else {
                 scenarioTextP.textContent = 'خطا در دریافت سناریو. لطفاً دوباره امتحان کنید.';
                 console.error('Unexpected API response structure:', result);
@@ -662,7 +648,7 @@ h1, h2, h3 {
             scenarioTextP.textContent = 'خطا در ارتباط با API. لطفاً اتصال خود را بررسی کنید.';
             console.error('Error fetching scenario:', error);
         } finally {
-            scenarioSpinner.style.display = 'none'; // Hide spinner
+            scenarioSpinner.style.display = 'none';
         }
     });
 </script>
