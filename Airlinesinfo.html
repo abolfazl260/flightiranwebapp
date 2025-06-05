@@ -76,6 +76,22 @@ h1, h2, h3 {
         content: '↓'; /* فلش به سمت پایین برای حالت موبایل */
     }
 }
+
+/* Spinner styling */
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #CAF0F8;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 </style>
 </head>
 <body class="antialiased">
@@ -90,7 +106,142 @@ h1, h2, h3 {
     <!-- بخش اصلی محتوا -->
     <main class="space-y-16">
 
-        <!-- بخش تحریم‌ها -->
+        <!-- بخش مقایسه اندازه ناوگان شرکت‌های کلیدی (اولین بخش درخواستی) -->
+        <section id="fleet-comparison">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-white mb-2">مقایسه اندازه ناوگان شرکت‌های کلیدی</h2>
+                <p class="max-w-3xl mx-auto text-lg text-cyan-200">
+                    این نمودار تعداد هواپیماهای فعال و غیرفعال چند شرکت هواپیمایی بزرگ ایران را نمایش می‌دهد. ماهان ایر به عنوان بزرگترین شرکت، ناوگان قابل توجهی را در اختیار دارد.
+                </p>
+            </div>
+            <div class="card rounded-lg shadow-lg p-6">
+                <h3 class="text-2xl font-bold text-center text-white mb-4">اندازه ناوگان ایرلاین‌های ایران</h3>
+                <div class="chart-container">
+                    <canvas id="fleetSizeChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش تجربه مسافر: خدمات در میان محدودیت‌ها (دومین بخش درخواستی) -->
+        <section id="passenger-experience">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-white mb-2">تجربه مسافر: خدمات در میان محدودیت‌ها</h2>
+                <p class="max-w-3xl mx-auto text-lg text-cyan-200">
+                   با وجود چالش‌ها، شرکت‌های ایرانی تلاش می‌کنند تا با ارائه خدمات باکیفیت، تجربه سفر خوشایندی برای مسافران فراهم کنند. کترینگ و خدمات دیجیتال از جمله زمینه‌های رقابت هستند.
+                </p>
+            </div>
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-center text-white mb-4">پیشتازان کترینگ در آسمان ایران</h3>
+                    <p class="text-base text-cyan-100 mb-6 text-center">کیفیت غذای داخل پرواز یکی از معیارهای مهم رضایت مسافر است. برخی شرکت‌ها در این زمینه تخصص ویژه‌ای دارند.</p>
+                    <div class="chart-container">
+                        <canvas id="cateringChart"></canvas>
+                    </div>
+                </div>
+                <div class="card rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-center text-white mb-4">خدمات مدرن و مشتری‌مداری</h3>
+                    <p class="text-base text-cyan-100 mb-6 text-center">ارائه خدمات آنلاین و برنامه‌های وفاداری نشان‌دهنده تلاش ایرلاین‌ها برای همگام شدن با استانداردهای جهانی و جذب مشتریان ثابت است.</p>
+                     <div class="space-y-4">
+                        <div class="bg-cyan-900/50 p-4 rounded-lg">
+                            <p class="font-bold text-lg text-white">🏆 برنامه‌های وفاداری</p>
+                            <p class="text-cyan-200">ایران ایر (Skygift)، ماهان (Mahan & Miles) و سپهران (RedMiles) با ارائه امتیاز و مزایا از مسافران دائمی خود قدردانی می‌کنند.</p>
+                        </div>
+                        <div class="bg-cyan-900/50 p-4 rounded-lg">
+                            <p class="font-bold text-lg text-white">💻 پذیرش آنلاین</p>
+                            <p class="text-cyan-200">شرکت‌هایی مانند ماهان و کیش‌ایر با فراهم کردن امکان چک‌این آنلاین، در زمان مسافران صرفه‌جویی می‌کنند.</p>
+                        </div>
+                         <div class="bg-cyan-900/50 p-4 rounded-lg">
+                            <p class="font-bold text-lg text-white">📲 اپلیکیشن موبایل</p>
+                            <p class="text-cyan-200">برخی ایرلاین‌ها برای سهولت دسترسی به خدمات، اپلیکیشن‌های موبایل اختصاصی ارائه می‌دهند.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش نمایه شرکت‌های برجسته (سومین بخش درخواستی) -->
+        <section id="prominent-companies">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-white mb-2">نمایه شرکت‌های برجسته</h2>
+                <p class="max-w-3xl mx-auto text-lg text-cyan-200">
+                    هر شرکت هواپیمایی ویژگی منحصربه‌فردی دارد که آن را از دیگران متمایز می‌کند، از قدمت و گستردگی تا ایمنی و خدمات خاص. در ادامه به معرفی برخی از مهم‌ترین ایرلاین‌های ایران می‌پردازیم.
+                </p>
+            </div>
+             <div class="card rounded-lg shadow-lg p-6">
+                <div class="space-y-4">
+                    <div class="bg-cyan-900/50 p-4 rounded-lg">
+                        <p class="font-bold text-lg text-white">✈️ ایران ایر (هما)</p>
+                        <p class="text-cyan-200">قدیمی‌ترین و پرچم‌دار ایران با سابقه‌ای درخشان در کترینگ و شبکه‌ی پروازی گسترده بین‌المللی و داخلی.</p>
+                    </div>
+                    <div class="bg-cyan-900/50 p-4 rounded-lg">
+                        <p class="font-bold text-lg text-white">✈️ ماهان ایر</p>
+                        <p class="text-cyan-200">بزرگترین شرکت هواپیمایی خصوصی ایران با ناوگان گسترده و خدمات باکیفیت، تمرکز بر پروازهای بین‌المللی و داخلی.</p>
+                    </div>
+                     <div class="bg-cyan-900/50 p-4 rounded-lg">
+                        <p class="font-bold text-lg text-white">✈️ ایران آسمان ایرلاینز</p>
+                        <p class="text-cyan-200">یکی از بزرگترین ایرلاین‌های داخلی با پوشش گسترده مسیرهای استانی و فرودگاه‌های کوچک‌تر.</p>
+                    </div>
+                    <div class="bg-cyan-900/50 p-4 rounded-lg">
+                        <p class="font-bold text-lg text-white">✈️ کیش ایر</p>
+                        <p class="text-cyan-200">ایرلاین منطقه آزاد کیش با تمرکز بر مسیرهای داخلی و پروازهای چارتری، به‌ویژه به مقصد جزیره کیش.</p>
+                    </div>
+                    <div class="bg-cyan-900/50 p-4 rounded-lg">
+                        <p class="font-bold text-lg text-white">✈️ آتا ایرلاینز</p>
+                        <p class="text-cyan-200">یک ایرلاین نسبتاً جدید با تمرکز بر پروازهای داخلی و منطقه‌ای.</p>
+                    </div>
+                    <div class="bg-cyan-900/50 p-4 rounded-lg">
+                        <p class="font-bold text-lg text-white">✈️ قشم ایر</p>
+                        <p class="text-cyan-200">تمرکز بر پروازهای داخلی، بین‌المللی و باری، از جمله ایرلاین‌های فعال در زمینه کترینگ.</p>
+                    </div>
+                    <div class="bg-cyan-900/50 p-4 rounded-lg">
+                        <p class="font-bold text-lg text-white">✈️ معراج ایرلاینز</p>
+                        <p class="text-cyan-200">شناخته‌شده با سرویس‌دهی منظم و استفاده از ناوگان جوان‌تر در میان ایرلاین‌های ایرانی.</p>
+                    </div>
+                    <div class="bg-cyan-900/50 p-4 rounded-lg">
+                        <p class="font-bold text-lg text-white">✈️ زاگرس ایرلاینز</p>
+                        <p class="text-cyan-200">یکی از ایرلاین‌های خصوصی فعال در مسیرهای داخلی و برخی پروازهای منطقه‌ای.</p>
+                    </div>
+                    <div class="bg-cyan-900/50 p-4 rounded-lg">
+                        <p class="font-bold text-lg text-white">✈️ کاسپین ایرلاینز</p>
+                        <p class="text-cyan-200">با تمرکز بر پروازهای داخلی و خارجی از جمله روسیه و کشورهای CIS.</p>
+                    </div>
+                    <div class="bg-cyan-900/50 p-4 rounded-lg">
+                        <p class="font-bold text-lg text-white">✈️ تابان ایر</p>
+                        <p class="text-cyan-200">ایرلاین منطقه خراسان با تمرکز بر پروازهای داخلی و بین‌المللی به مشهد.</p>
+                    </div>
+                     <div class="bg-cyan-900/50 p-4 rounded-lg">
+                        <p class="font-bold text-lg text-white">✈️ سپهران ایرلاینز</p>
+                        <p class="text-cyan-200">ایرلاین خصوصی با ناوگان مدرن‌تر و تمرکز بر پروازهای داخلی و برخی مسیرهای بین‌المللی.</p>
+                    </div>
+                     <div class="bg-cyan-900/50 p-4 rounded-lg">
+                        <p class="font-bold text-lg text-white">✈️ فلای پرشیا</p>
+                        <p class="text-cyan-200">ایرلاین جدیدتر با هدف ارائه خدمات باکیفیت در پروازهای داخلی و منطقه‌ای.</p>
+                    </div>
+                     <div class="bg-cyan-900/50 p-4 rounded-lg">
+                        <p class="font-bold text-lg text-white">✈️ پارس ایر</p>
+                        <p class="text-cyan-200">ایرلاین جدیدی که با هدف پوشش مسیرهای داخلی و بین‌المللی در حال توسعه است.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش ایمنی: چالش اصلی صنعت (چهارمین بخش درخواستی) -->
+        <section id="safety-main">
+             <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-white mb-2">ایمنی: چالش اصلی صنعت</h2>
+                <p class="max-w-3xl mx-auto text-lg text-cyan-200">
+                    رتبه‌بندی ایمنی شرکت‌های هواپیمایی، که بر اساس سوابق حوادث و رعایت استانداردها انجام می‌شود، تصویری واضح از وضعیت ایمنی در صنعت هوانوردی ایران ارائه می‌دهد. این نمودار تفاوت قابل توجهی را بین شرکت‌ها نشان می‌دهد.
+                </p>
+            </div>
+            <div class="card rounded-lg shadow-lg p-6">
+                <h3 class="text-2xl font-bold text-center text-white mb-4">رتبه‌بندی ایمنی شرکت‌های منتخب (از ۷)</h3>
+                 <div class="chart-container h-96">
+                    <canvas id="safetyRatingChart"></canvas>
+                </div>
+            </div>
+        </section>
+        
+        <!-- بخش تحریم‌ها (بخش اصلی قبلی، اکنون در مکان جدید) -->
         <section id="sanctions">
             <div class="text-center mb-8">
                 <h2 class="text-3xl font-bold text-white mb-2">آسمانِ در تنگنا: تأثیر تحریم‌ها</h2>
@@ -133,96 +284,6 @@ h1, h2, h3 {
             </div>
         </section>
         
-        <!-- بخش بازیگران اصلی (ایرلاین‌ها) -->
-        <section id="players">
-            <div class="text-center mb-8">
-                <h2 class="text-3xl font-bold text-white mb-2">بازیگران اصلی: ناوگانی متنوع</h2>
-                <p class="max-w-3xl mx-auto text-lg text-cyan-200">
-                    صنعت هوانوردی ایران میزبان ترکیبی از شرکت‌های دولتی و خصوصی است که هر یک برای کسب سهمی از بازار در تلاشند. اندازه ناوگان، یکی از شاخص‌های کلیدی قدرت این بازیگران است.
-                </p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="card rounded-lg shadow-lg p-6">
-                    <h3 class="text-2xl font-bold text-center text-white mb-4">مقایسه اندازه ناوگان شرکت‌های کلیدی</h3>
-                    <p class="text-base text-cyan-100 mb-6 text-center">این نمودار تعداد هواپیماهای فعال و غیرفعال چند شرکت هواپیمایی بزرگ ایران را نمایش می‌دهد. ماهان ایر به عنوان بزرگترین شرکت، ناوگان قابل توجهی را در اختیار دارد.</p>
-                    <div class="chart-container">
-                        <canvas id="fleetSizeChart"></canvas>
-                    </div>
-                </div>
-                 <div class="card rounded-lg shadow-lg p-6">
-                    <h3 class="text-2xl font-bold text-center text-white mb-4">نمایه شرکت‌های برجسته</h3>
-                    <p class="text-base text-cyan-100 mb-6 text-center">هر شرکت هواپیمایی ویژگی منحصربه‌فردی دارد که آن را از دیگران متمایز می‌کند، از قدمت و گستردگی تا ایمنی و خدمات خاص.</p>
-                    <div class="space-y-4">
-                        <div class="bg-cyan-900/50 p-4 rounded-lg">
-                            <p class="font-bold text-lg text-white">✈️ ایران ایر (هما)</p>
-                            <p class="text-cyan-200">قدیمی‌ترین و پرچم‌دار ایران با سابقه‌ای درخشان در کترینگ.</p>
-                        </div>
-                        <div class="bg-cyan-900/50 p-4 rounded-lg">
-                            <p class="font-bold text-lg text-white">✈️ ماهان ایر</p>
-                            <p class="text-cyan-200">بزرگترین شرکت هواپیمایی ایران با ناوگان گسترده و خدمات باکیفیت.</p>
-                        </div>
-                         <div class="bg-cyan-900/50 p-4 rounded-lg">
-                            <p class="font-bold text-lg text-white">✈️ آتا ایرلاینز</p>
-                            <p class="text-cyan-200">شناخته‌شده به عنوان یکی از ایمن‌ترین شرکت‌های هواپیمایی داخلی.</p>
-                        </div>
-                         <div class="bg-cyan-900/50 p-4 rounded-lg">
-                            <p class="font-bold text-lg text-white">✈️ ایران آسمان</p>
-                            <p class="text-red-300">متأسفانه، به دلیل سوابق ایمنی، در لیست شرکت‌های ناامن جهان قرار گرفته است.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- بخش تجربه مسافر و خدمات -->
-        <section id="services">
-            <div class="text-center mb-8">
-                <h2 class="text-3xl font-bold text-white mb-2">تجربه مسافر: خدمات در میان محدودیت‌ها</h2>
-                <p class="max-w-3xl mx-auto text-lg text-cyan-200">
-                   با وجود چالش‌ها، شرکت‌های ایرانی تلاش می‌کنند تا با ارائه خدمات باکیفیت، تجربه سفر خوشایندی برای مسافران فراهم کنند. کترینگ و خدمات دیجیتال از جمله زمینه‌های رقابت هستند.
-                </p>
-            </div>
-             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="card rounded-lg shadow-lg p-6">
-                    <h3 class="text-2xl font-bold text-center text-white mb-4">پیشتازان کترینگ در آسمان ایران</h3>
-                    <p class="text-base text-cyan-100 mb-6 text-center">کیفیت غذای داخل پرواز یکی از معیارهای مهم رضایت مسافر است. برخی شرکت‌ها در این زمینه تخصص ویژه‌ای دارند.</p>
-                    <div class="chart-container">
-                        <canvas id="cateringChart"></canvas>
-                    </div>
-                </div>
-                <div class="card rounded-lg shadow-lg p-6">
-                    <h3 class="text-2xl font-bold text-center text-white mb-4">خدمات مدرن و مشتری‌مداری</h3>
-                    <p class="text-base text-cyan-100 mb-6 text-center">ارائه خدمات آنلاین و برنامه‌های وفاداری نشان‌دهنده تلاش ایرلاین‌ها برای همگام شدن با استانداردهای جهانی و جذب مشتریان ثابت است.</p>
-                     <div class="space-y-4">
-                        <div class="bg-cyan-900/50 p-4 rounded-lg">
-                            <p class="font-bold text-lg text-white">🏆 برنامه‌های وفاداری</p>
-                            <p class="text-cyan-200">ایران ایر (Skygift)، ماهان (Mahan & Miles) و سپهران (RedMiles) با ارائه امتیاز و مزایا از مسافران دائمی خود قدردانی می‌کنند.</p>
-                        </div>
-                        <div class="bg-cyan-900/50 p-4 rounded-lg">
-                            <p class="font-bold text-lg text-white">💻 پذیرش آنلاین</p>
-                            <p class="text-cyan-200">شرکت‌هایی مانند ماهان و کیش‌ایر با فراهم کردن امکان چک‌این آنلاین، در زمان مسافران صرفه‌جویی می‌کنند.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- بخش ایمنی -->
-        <section id="safety">
-             <div class="text-center mb-8">
-                <h2 class="text-3xl font-bold text-white mb-2">ایمنی: چالش اصلی صنعت</h2>
-                <p class="max-w-3xl mx-auto text-lg text-cyan-200">
-                    رتبه‌بندی ایمنی شرکت‌های هواپیمایی، که بر اساس سوابق حوادث و رعایت استانداردها انجام می‌شود، تصویری واضح از وضعیت ایمنی در صنعت هوانوردی ایران ارائه می‌دهد. این نمودار تفاوت قابل توجهی را بین شرکت‌ها نشان می‌دهد.
-                </p>
-            </div>
-            <div class="card rounded-lg shadow-lg p-6">
-                <h3 class="text-2xl font-bold text-center text-white mb-4">رتبه‌بندی ایمنی شرکت‌های منتخب (از ۷)</h3>
-                 <div class="chart-container h-96">
-                    <canvas id="safetyRatingChart"></canvas>
-                </div>
-            </div>
-        </section>
-
         <!-- بخش آینده -->
         <section id="future">
             <div class="text-center mb-8">
@@ -248,6 +309,16 @@ h1, h2, h3 {
                         <div class="bg-cyan-900/50 p-3 rounded-lg"><p>نوسازی ناوگان</p></div>
                          <div class="flow-arrow"></div>
                         <div class="bg-cyan-900/50 p-3 rounded-lg"><p>افزایش ایمنی و ظرفیت</p></div>
+                    </div>
+                    <!-- LLM Feature: Generate Future Scenario -->
+                    <div class="text-center mt-6">
+                        <button id="generateScenarioBtn" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition-colors duration-200">
+                            ✨ سناریوی آینده را بسازید
+                        </button>
+                        <div id="scenarioOutput" class="mt-4 p-4 bg-cyan-900/50 rounded-lg text-cyan-100 text-right" dir="rtl" style="display: none;">
+                            <div class="spinner" id="scenarioSpinner" style="display: none;"></div>
+                            <p id="scenarioText"></p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -295,11 +366,46 @@ h1, h2, h3 {
                         <img src="https://placehold.co/100x40/0077B6/FFFFFF?text=Qeshm+Air" alt="لوگوی قشم ایر" class="mb-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/100x40/0077B6/FFFFFF?text=Qeshm+Air'">
                         <p class="text-white text-sm font-semibold">قشم ایر</p>
                     </a>
+                    <!-- معراج ایرلاینز -->
+                    <a href="https://meraj.aero/" target="_blank" class="flex flex-col items-center p-3 rounded-lg bg-cyan-900/50 hover:bg-cyan-800/70 transition-colors duration-200">
+                        <img src="https://placehold.co/100x40/0077B6/FFFFFF?text=Meraj+Air" alt="لوگوی معراج ایرلاینز" class="mb-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/100x40/0077B6/FFFFFF?text=Meraj+Air'">
+                        <p class="text-white text-sm font-semibold">معراج ایرلاینز</p>
+                    </a>
+                    <!-- زاگرس ایرلاینز -->
+                    <a href="https://zagrosairlines.com/" target="_blank" class="flex flex-col items-center p-3 rounded-lg bg-cyan-900/50 hover:bg-cyan-800/70 transition-colors duration-200">
+                        <img src="https://placehold.co/100x40/0077B6/FFFFFF?text=Zagros+Air" alt="لوگوی زاگرس ایرلاینز" class="mb-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/100x40/0077B6/FFFFFF?text=Zagros+Air'">
+                        <p class="text-white text-sm font-semibold">زاگرس ایرلاینز</p>
+                    </a>
+                    <!-- کاسپین ایرلاینز -->
+                    <a href="https://caspian.aero/" target="_blank" class="flex flex-col items-center p-3 rounded-lg bg-cyan-900/50 hover:bg-cyan-800/70 transition-colors duration-200">
+                        <img src="https://placehold.co/100x40/0077B6/FFFFFF?text=Caspian+Air" alt="لوگوی کاسپین ایرلاینز" class="mb-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/100x40/0077B6/FFFFFF?text=Caspian+Air'">
+                        <p class="text-white text-sm font-semibold">کاسپین ایرلاینز</p>
+                    </a>
+                    <!-- تابان ایر -->
+                    <a href="https://taban.aero/" target="_blank" class="flex flex-col items-center p-3 rounded-lg bg-cyan-900/50 hover:bg-cyan-800/70 transition-colors duration-200">
+                        <img src="https://placehold.co/100x40/0077B6/FFFFFF?text=Taban+Air" alt="لوگوی تابان ایر" class="mb-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/100x40/0077B6/FFFFFF?text=Taban+Air'">
+                        <p class="text-white text-sm font-semibold">تابان ایر</p>
+                    </a>
+                    <!-- سپهران ایرلاینز -->
+                    <a href="https://sepehran.aero/" target="_blank" class="flex flex-col items-center p-3 rounded-lg bg-cyan-900/50 hover:bg-cyan-800/70 transition-colors duration-200">
+                        <img src="https://placehold.co/100x40/0077B6/FFFFFF?text=Sepehran+Air" alt="لوگوی سپهران ایرلاینز" class="mb-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/100x40/0077B6/FFFFFF?text=Sepehran+Air'">
+                        <p class="text-white text-sm font-semibold">سپهران ایرلاینز</p>
+                    </a>
+                     <!-- فلای پرشیا -->
+                    <a href="https://flypersia.aero/" target="_blank" class="flex flex-col items-center p-3 rounded-lg bg-cyan-900/50 hover:bg-cyan-800/70 transition-colors duration-200">
+                        <img src="https://placehold.co/100x40/0077B6/FFFFFF?text=FlyPersia" alt="لوگوی فلای پرشیا" class="mb-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/100x40/0077B6/FFFFFF?text=FlyPersia'">
+                        <p class="text-white text-sm font-semibold">فلای پرشیا</p>
+                    </a>
+                     <!-- پارس ایر -->
+                    <a href="https://www.parsair.ir/" target="_blank" class="flex flex-col items-center p-3 rounded-lg bg-cyan-900/50 hover:bg-cyan-800/70 transition-colors duration-200">
+                        <img src="https://placehold.co/100x40/0077B6/FFFFFF?text=Pars+Air" alt="لوگوی پارس ایر" class="mb-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/100x40/0077B6/FFFFFF?text=Pars+Air'">
+                        <p class="text-white text-sm font-semibold">پارس ایر</p>
+                    </a>
                 </div>
             </div>
 
             <!-- لینک به ربات تلگرام -->
-            <div class="card rounded-lg shadow-lg p-6 text-center">
+            <div class="card rounded-lg shadow-lg p-6 text-center mt-8">
                 <h3 class="text-2xl font-bold text-white mb-4">ربات تلگرام</h3>
                 <p class="text-base text-cyan-100 mb-4">برای اطلاعات بیشتر و پیگیری وضعیت پروازها، می‌توانید از ربات تلگرام ما استفاده کنید:</p>
                 <a href="https://t.me/Flightiranbot" target="_blank" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition-colors duration-200">
@@ -387,13 +493,13 @@ h1, h2, h3 {
         }
     };
 
-    // داده‌های نمودار اندازه ناوگان
+    // داده‌های نمودار اندازه ناوگان (به روز شده با ایرلاین‌های بیشتر)
     const fleetSizeData = {
-        labels: ['ماهان ایر', 'ایران ایر', 'ایران آسمان', 'کیش ایر', 'ایران ایرتور'],
+        labels: ['ماهان ایر', 'ایران ایر', 'ایران آسمان', 'کیش ایر', 'قشم ایر', 'آتا ایرلاینز', 'معراج ایرلاینز', 'زاگرس ایرلاینز'],
         datasets: [
             {
                 label: 'تعداد کل هواپیماها',
-                data: [44, 37, 27, 12, 12],
+                data: [44, 37, 27, 12, 10, 8, 7, 6], // داده‌های نمونه
                 backgroundColor: '#00B4D8', // رنگ ستون‌ها
             }
         ]
@@ -405,12 +511,12 @@ h1, h2, h3 {
         options: sharedChartOptions // استفاده از گزینه‌های مشترک
     });
 
-    // داده‌های نمودار کترینگ
+    // داده‌های نمودار کترینگ (به روز شده با ایرلاین‌های بیشتر)
     const cateringData = {
-        labels: ['قشم ایر (کترینگ تخصصی)', 'ایران ایر', 'ایران ایرتور'],
+        labels: ['قشم ایر (کترینگ تخصصی)', 'ایران ایر', 'ماهان ایر', 'سپهران ایرلاینز', 'معراج ایرلاینز'],
         datasets: [{
-            data: [40, 35, 25],
-            backgroundColor: ['#00B4D8', '#90E0EF', '#CAF0F8'], // رنگ بخش‌های نمودار دایره‌ای
+            data: [40, 35, 30, 20, 15], // داده‌های نمونه
+            backgroundColor: ['#00B4D8', '#90E0EF', '#CAF0F8', '#00A8E8', '#48CAE4'], // رنگ بخش‌های نمودار دایره‌ای
             borderColor: '#023047', // رنگ حاشیه بخش‌ها
             hoverOffset: 4 // فاصله هنگام هاور
         }]
@@ -460,17 +566,21 @@ h1, h2, h3 {
         }
     });
 
-    // داده‌های نمودار رتبه‌بندی ایمنی
+    // داده‌های نمودار رتبه‌بندی ایمنی (به روز شده با ایرلاین‌های بیشتر)
     const safetyRatingData = {
-        labels: ['کیش ایر', 'ماهان ایر', 'ایران ایر', 'ایران آسمان'],
+        labels: ['کیش ایر', 'ماهان ایر', 'سپهران ایرلاینز', 'ایران ایر', 'قشم ایر', 'آتا ایرلاینز', 'ایران آسمان', 'کاسپین ایرلاینز'],
         datasets: [{
             label: 'رتبه ایمنی (از ۷)',
-            data: [7.0, 5.0, 2.0, 2.0],
+            data: [6.5, 5.0, 4.5, 3.5, 3.0, 2.5, 2.0, 1.5], // داده‌های نمونه
              backgroundColor: [ // رنگ‌های مختلف برای هر ستون بر اساس رتبه
                 '#33FF57', /* سبز روشن (برای ایمن‌ترین) */
+                '#99FF33',
                 '#FFC300', /* زرد (برای متوسط) */
+                '#FF8C00',
                 '#FF5733', /* نارنجی (برای کم‌امنیت) */
-                '#C70039'  /* قرمز تیره (برای ناامن‌ترین) */
+                '#E74C3C',
+                '#C70039',  /* قرمز تیره (برای ناامن‌ترین) */
+                '#8B0000'
             ],
         }]
     };
@@ -499,6 +609,60 @@ h1, h2, h3 {
                 },
                 tooltip: sharedChartOptions.plugins.tooltip // استفاده از تابع مشترک برای عنوان tooltip
             }
+        }
+    });
+
+    // LLM Feature: Generate Future Scenario
+    document.getElementById('generateScenarioBtn').addEventListener('click', async () => {
+        const scenarioOutputDiv = document.getElementById('scenarioOutput');
+        const scenarioTextP = document.getElementById('scenarioText');
+        const scenarioSpinner = document.getElementById('scenarioSpinner');
+
+        scenarioOutputDiv.style.display = 'block'; // Show the output area
+        scenarioTextP.textContent = ''; // Clear previous text
+        scenarioSpinner.style.display = 'block'; // Show spinner
+
+        // Define possible prompts for variety
+        const prompts = [
+            "یک سناریوی کوتاه (حداکثر ۱۰۰ کلمه) درباره آینده روشن و موفق صنعت هوانوردی ایران، با تمرکز بر نوسازی ناوگان و افزایش پروازهای بین‌المللی، تولید کنید.",
+            "یک سناریوی کوتاه (حداکثر ۱۰۰ کلمه) درباره چالش‌ها و فرصت‌های صنعت هوانوردی ایران در ۱۰ سال آینده، با فرض تداوم برخی تحریم‌ها و تلاش برای خودکفایی، تولید کنید.",
+            "یک سناریوی کوتاه (حداکثر ۱۰۰ کلمه) درباره تأثیر پیشرفت‌های تکنولوژیکی داخلی بر صنعت هوانوردی ایران در آینده، با فرض دسترسی محدود به فناوری‌های خارجی، تولید کنید.",
+            "با فرض رفع کامل تحریم‌ها، یک سناریوی کوتاه (حداکثر ۱۰۰ کلمه) درباره رشد سریع و تحول صنعت هوانوردی ایران در ۵ سال آینده، تولید کنید.",
+            "یک سناریوی کوتاه (حداکثر ۱۰۰ کلمه) در مورد تأثیر افزایش رقابت داخلی و ظهور ایرلاین‌های جدید بر صنعت هوانوردی ایران در آینده، تولید کنید."
+        ];
+        // Select a random prompt
+        const prompt = prompts[Math.floor(Math.random() * prompts.length)];
+
+        let chatHistory = [];
+        chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+
+        try {
+            const payload = { contents: chatHistory };
+            const apiKey = ""; // Canvas will provide this at runtime
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await response.json();
+
+            if (result.candidates && result.candidates.length > 0 &&
+                result.candidates[0].content && result.candidates[0].content.parts &&
+                result.candidates[0].content.parts.length > 0) {
+                const text = result.candidates[0].content.parts[0].text;
+                scenarioTextP.textContent = text; // Display generated text
+            } else {
+                scenarioTextP.textContent = 'خطا در دریافت سناریو. لطفاً دوباره امتحان کنید.';
+                console.error('Unexpected API response structure:', result);
+            }
+        } catch (error) {
+            scenarioTextP.textContent = 'خطا در ارتباط با API. لطفاً اتصال خود را بررسی کنید.';
+            console.error('Error fetching scenario:', error);
+        } finally {
+            scenarioSpinner.style.display = 'none'; // Hide spinner
         }
     });
 </script>
