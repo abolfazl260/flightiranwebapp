@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منوی اصلی ربات</title>
+    <title>منوی اصلی </title>
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Load Vazirmatn Font from Google Fonts -->
@@ -27,7 +27,7 @@
             margin: 0;
             box-sizing: border-box;
             position: relative;
-            overflow: hidden;
+            /* overflow: hidden; -- Already removed, scrolling should work */
         }
         #background-canvas {
             position: fixed;
@@ -38,18 +38,18 @@
             z-index: 0;
         }
         .menu-container {
-            background-color: rgba(0, 119, 182, 0.85);
+            background-color: rgba(0, 119, 182, 0.85); /* Semi-transparent */
             border: 1px solid #00B4D8;
             padding: 20px;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             max-width: 550px;
             width: 95%;
-            margin-top: 20px;
+            margin-top: 20px; /* Pushes menu down slightly */
             display: flex;
             flex-direction: column;
             gap: 10px;
-            z-index: 1;
+            z-index: 1; /* Ensures menu is above the canvas */
             position: relative;
         }
         h1, h2, h3 {
@@ -174,9 +174,20 @@
     <script>
         // Initialize Telegram Web App
         Telegram.WebApp.ready();
-        Telegram.WebApp.setHeaderColor('secondary_bg_color');
-        Telegram.WebApp.setBackgroundColor('bg_color');
+        // Set header and background color using Telegram's theme if available
+        // These might not directly affect the canvas background but are good practice for Web Apps
+        if (Telegram.WebApp.themeParams && Telegram.WebApp.themeParams.bg_color) {
+            Telegram.WebApp.setBackgroundColor(Telegram.WebApp.themeParams.bg_color);
+        } else {
+            Telegram.WebApp.setBackgroundColor('#023047'); // Fallback
+        }
+        if (Telegram.WebApp.themeParams && Telegram.WebApp.themeParams.secondary_bg_color) {
+             Telegram.WebApp.setHeaderColor(Telegram.WebApp.themeParams.secondary_bg_color);
+        } else {
+            Telegram.WebApp.setHeaderColor('#0077B6'); // Fallback
+        }
         Telegram.WebApp.expand();
+
 
         // Configure Main Button
         Telegram.WebApp.MainButton.setText("بازگشت به ربات");
@@ -185,17 +196,13 @@
             Telegram.WebApp.close();
         });
 
-        // Apply Telegram theme parameters to CSS variables
+        // Apply Telegram theme parameters to CSS variables (for elements outside canvas)
         const applyThemeParams = () => {
             const themeParams = Telegram.WebApp.themeParams;
             if (themeParams) {
-                document.documentElement.style.setProperty('--tg-theme-bg-color', themeParams.bg_color || '#f4f4f4');
-                document.documentElement.style.setProperty('--tg-theme-text-color', themeParams.text_color || '#333');
-                document.documentElement.style.setProperty('--tg-theme-hint-color', themeParams.hint_color || '#aaa');
-                document.documentElement.style.setProperty('--tg-theme-link-color', themeParams.link_color || '#0056b3');
-                document.documentElement.style.setProperty('--tg-theme-button-color', themeParams.button_color || '#007bff');
-                document.documentElement.style.setProperty('--tg-theme-button-text-color', themeParams.button_text_color || '#ffffff');
-                document.documentElement.style.setProperty('--tg-theme-secondary-bg-color', themeParams.secondary_bg_color || '#ffffff');
+                document.documentElement.style.setProperty('--tg-theme-bg-color', themeParams.bg_color || '#023047');
+                document.documentElement.style.setProperty('--tg-theme-text-color', themeParams.text_color || '#CAF0F8');
+                // ... other theme params as needed
             }
         };
         applyThemeParams();
@@ -229,24 +236,18 @@
              userProfilePic.style.display = 'none';
         }
 
+        // Button event listeners
         document.querySelectorAll('.main-menu-button').forEach(button => {
             button.addEventListener('click', function(event) {
                 const type = this.dataset.type;
                 if (type === 'url') {
                     event.preventDefault();
                     const url = this.href;
-                    if (Telegram.WebApp.openLink) {
-                        Telegram.WebApp.openLink(url);
-                    } else {
-                        window.open(url, '_blank');
-                    }
-                } else if (type === 'callback') {
+                    Telegram.WebApp.openLink(url);
+                } else if (type === 'callback' || type === 'send_time') {
+                    const action = (type === 'send_time') ? 'send_current_time' : 'web_app_callback';
                     const callbackData = this.dataset.callback;
-                    Telegram.WebApp.sendData(JSON.stringify({ action: 'web_app_callback', data: callbackData }));
-                    Telegram.WebApp.close();
-                } else if (type === 'send_time') {
-                    const callbackData = this.dataset.callback;
-                    Telegram.WebApp.sendData(JSON.stringify({ action: 'send_current_time', data: callbackData }));
+                    Telegram.WebApp.sendData(JSON.stringify({ action: action, data: callbackData }));
                     Telegram.WebApp.close();
                 }
             });
@@ -261,51 +262,51 @@
         canvas.width = width;
         canvas.height = height;
 
-        window.addEventListener('resize', () => {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
-            initializeEarth(); // Re-initialize Earth on resize
-            initializePlanes();
-        });
+        // Simple arrow SVG pointing right: M0,0 is the tip, tail extends to -15
+        const planeSVGPath = new Path2D("M0 -4 L12 0 L0 4 L3 0 Z"); // More plane-like arrow
+        const planeWidth = 12; // Approximate width (length of the arrow body)
+        const planeHeight = 8; // Approximate height (wingspan)
+        const planeScale = 1.3; // Scale of the SVG plane
+        const scaledPlaneWidth = planeWidth * planeScale;
 
-        const planeIcon = `✈️`;
-        const planeSize = 20;
-        const pathColor = 'rgba(0, 180, 216, 0.25)'; // Slightly more visible path
-        const pathWidth = 1; // Thinner path
+
+        const pathColor = 'rgba(0, 180, 216, 0.15)'; // Even more subtle path
+        const pathWidth = 0.75; // Thinner path
 
         let planes = [];
         let earth = {};
+        let earthRotation = 0; // For animating Earth's rotation
 
-        // Function to initialize Earth properties
         function initializeEarth() {
+            const earthRadiusBase = Math.min(width, height);
             earth = {
                 x: width / 2,
-                y: height / 2,
-                radius: Math.min(width, height) * 0.35, // Earth radius based on screen size
-                color1: 'rgba(3, 100, 150, 0.1)', // Faded blue for Earth (ocean)
-                color2: 'rgba(0, 150, 199, 0.15)'  // Slightly darker faded blue
+                y: height * 0.5, // Position Earth slightly lower to feel more like a horizon
+                radius: earthRadiusBase * 0.7, // Earth radius based on screen size, larger
+                atmosphereRadius: earthRadiusBase * 0.75, // Slightly larger for atmosphere
+                colorCore: 'rgba(2, 48, 71, 0.2)', // Darker core
+                colorSurface: 'rgba(0, 119, 182, 0.15)', // Mid-tone surface/ocean
+                colorAtmosphere: 'rgba(127, 200, 230, 0.1)' // Faint outer atmosphere glow
             };
         }
 
         function initializePlanes() {
             planes = [];
-            const numPlanes = 5; // Reduced number of planes for a cleaner look
+            const numPlanes = 8; // Increased number of planes
 
             for (let i = 0; i < numPlanes; i++) {
                 const startX = Math.random() * width;
-                const startY = Math.random() * height;
+                const startY = Math.random() * height * 0.8; // Keep planes mostly in upper 80%
                 let endX = Math.random() * width;
-                let endY = Math.random() * height;
+                let endY = Math.random() * height * 0.8;
 
-                while (Math.abs(startX - endX) < width * 0.3 && Math.abs(startY - endY) < height * 0.3) {
+                // Ensure paths are reasonably long
+                while (Math.sqrt(Math.pow(startX - endX, 2) + Math.pow(startY - endY, 2)) < Math.min(width, height) * 0.4) {
                     endX = Math.random() * width;
-                    endY = Math.random() * height;
+                    endY = Math.random() * height * 0.8;
                 }
                 
-                // Slower speed for each plane
-                const speed = (Math.random() * 0.15 + 0.05) / 100; // Speed: 0.0005 to 0.002
+                const speed = (Math.random() * 0.08 + 0.02) / 100; // Slow: 0.0002 to 0.001
 
                 planes.push({
                     x: startX,
@@ -314,7 +315,7 @@
                     startY: startY,
                     endX: endX,
                     endY: endY,
-                    progress: Math.random(), // Start at a random progress for variety
+                    progress: Math.random(), // Start at random progress
                     speed: speed,
                     angle: Math.atan2(endY - startY, endX - startX)
                 });
@@ -322,20 +323,36 @@
         }
 
         function drawEarth() {
-            ctx.beginPath();
-            const gradient = ctx.createRadialGradient(earth.x, earth.y, earth.radius * 0.5, earth.x, earth.y, earth.radius);
-            gradient.addColorStop(0, earth.color2);
-            gradient.addColorStop(1, earth.color1);
+            ctx.save();
+            ctx.translate(earth.x, earth.y);
+            ctx.rotate(earthRotation); // Apply rotation
+
+            // Draw main Earth body
+            let gradient = ctx.createRadialGradient(
+                0, 0, earth.radius * 0.5, // Inner start (center of Earth)
+                0, 0, earth.radius       // Outer end (surface of Earth)
+            );
+            gradient.addColorStop(0, earth.colorSurface);
+            gradient.addColorStop(1, earth.colorCore);
             ctx.fillStyle = gradient;
-            ctx.arc(earth.x, earth.y, earth.radius, 0, Math.PI * 2);
+            ctx.beginPath();
+            ctx.arc(0, 0, earth.radius, 0, Math.PI * 2);
             ctx.fill();
 
-            // Add a very subtle border to the Earth
+            // Draw subtle atmosphere glow
+            gradient = ctx.createRadialGradient(
+                0, 0, earth.radius * 0.9, // Start glow just inside surface
+                0, 0, earth.atmosphereRadius // End glow outside surface
+            );
+            gradient.addColorStop(0, 'rgba(127, 200, 230, 0)'); // Transparent inside
+            gradient.addColorStop(0.8, earth.colorAtmosphere);
+            gradient.addColorStop(1, 'rgba(127, 200, 230, 0)'); // Fade out at edge
+            ctx.fillStyle = gradient;
             ctx.beginPath();
-            ctx.strokeStyle = 'rgba(128, 200, 255, 0.05)'; // Very faint border
-            ctx.lineWidth = 2;
-            ctx.arc(earth.x, earth.y, earth.radius, 0, Math.PI * 2);
-            ctx.stroke();
+            ctx.arc(0, 0, earth.atmosphereRadius, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.restore();
         }
 
         function drawPlane(plane) {
@@ -345,26 +362,23 @@
             ctx.lineTo(plane.endX, plane.endY);
             ctx.strokeStyle = pathColor;
             ctx.lineWidth = pathWidth;
-            ctx.setLineDash([5, 5]); // Dashed line for path
+            ctx.setLineDash([2, 4]); // Shorter dashes, more space
             ctx.stroke();
             ctx.setLineDash([]); // Reset dash
 
-            // Save context state
+            // Draw the plane
             ctx.save();
-            // Translate to plane's position
-            ctx.translate(plane.x, plane.y);
-            // Rotate to match path direction. Emoji points right by default, so no extra rotation for standard emoji.
-            // If using an SVG pointing upwards, would add Math.PI / 2 to plane.angle.
-            ctx.rotate(plane.angle); 
+            ctx.translate(plane.x, plane.y); // Move to plane's current position
+            ctx.rotate(plane.angle);         // Rotate canvas to plane's travel direction
+            ctx.scale(planeScale, planeScale); // Scale the plane
             
-            // Draw the plane icon
-            ctx.font = `${planeSize}px Arial`; // Ensure font is set before fillText
+            // The SVG "M0 -4 L12 0 L0 4 L3 0 Z" has its tip at (12,0) and (0,0) is mid-tail.
+            // We want to rotate around a point closer to the center of the plane, e.g., (6,0) in SVG coords.
+            ctx.translate(-6, 0); // Shift rotation pivot to SVG's visual center along its length
+
             ctx.fillStyle = 'rgba(202, 240, 248, 0.9)'; // Plane color
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText(planeIcon, 0, 0); // Draw emoji at the rotated (0,0)
+            ctx.fill(planeSVGPath);
             
-            // Restore context state
             ctx.restore();
         }
 
@@ -375,54 +389,65 @@
                 plane.x = plane.startX + (plane.endX - plane.startX) * plane.progress;
                 plane.y = plane.startY + (plane.endY - plane.startY) * plane.progress;
 
-                if (plane.progress >= 1) {
-                    plane.progress = 0; // Reset progress
-                    // Assign a new random path starting from an edge
+                // Reset plane if it goes off course or completes path
+                if (plane.progress >= 1 || plane.x < -scaledPlaneWidth || plane.x > width + scaledPlaneWidth || plane.y < -scaledPlaneWidth || plane.y > height + scaledPlaneWidth ) {
+                    plane.progress = 0;
                     const edge = Math.floor(Math.random() * 4);
-                    switch(edge) {
-                        case 0: // Top edge
-                            plane.startX = Math.random() * width;
-                            plane.startY = -planeSize; // Start slightly off-screen
-                            break;
-                        case 1: // Right edge
-                            plane.startX = width + planeSize;
-                            plane.startY = Math.random() * height;
-                            break;
-                        case 2: // Bottom edge
-                            plane.startX = Math.random() * width;
-                            plane.startY = height + planeSize;
-                            break;
-                        case 3: // Left edge
-                            plane.startX = -planeSize;
-                            plane.startY = Math.random() * height;
-                            break;
+                    const offset = scaledPlaneWidth * 1.5; 
+                    switch(edge) { // Start from off-screen edges
+                        case 0: plane.startX = Math.random() * width; plane.startY = -offset; break; // Top
+                        case 1: plane.startX = width + offset; plane.startY = Math.random() * height * 0.8; break; // Right
+                        case 2: plane.startX = Math.random() * width; plane.startY = height + offset; break; // Bottom
+                        case 3: plane.startX = -offset; plane.startY = Math.random() * height * 0.8; break; // Left
                     }
-                    plane.endX = Math.random() * width;
-                    plane.endY = Math.random() * height;
+                    // Target a point within the visible area (with some margin)
+                    plane.endX = Math.random() * (width - 20) + 10;
+                    plane.endY = Math.random() * (height * 0.8 - 20) + 10;
                     
-                    // Ensure new path is reasonably long
                     while (Math.sqrt(Math.pow(plane.startX - plane.endX, 2) + Math.pow(plane.startY - plane.endY, 2)) < Math.min(width, height) * 0.4) {
-                         plane.endX = Math.random() * width;
-                         plane.endY = Math.random() * height;
+                         plane.endX = Math.random() * (width - 20) + 10;
+                         plane.endY = Math.random() * (height * 0.8 - 20) + 10;
                     }
                     plane.angle = Math.atan2(plane.endY - plane.startY, plane.endX - plane.startX);
-                    plane.x = plane.startX; // Reset current position to new start
+                    plane.x = plane.startX; // Reset current position
                     plane.y = plane.startY;
                 }
             });
         }
+        
+        let lastTimestamp = 0;
+        function animate(timestamp) {
+            const deltaTime = timestamp - lastTimestamp;
+            lastTimestamp = timestamp;
 
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-            drawEarth(); // Draw Earth first
-            updatePlanes();
-            planes.forEach(drawPlane);
-            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, width, height); // Clear canvas
+
+            earthRotation += 0.00005 * deltaTime; // Slow rotation for Earth, dependent on deltaTime
+            if (earthRotation > Math.PI * 2) earthRotation -= Math.PI * 2;
+
+            drawEarth(); 
+            updatePlanes(); // Update plane positions
+            planes.forEach(drawPlane); // Draw each plane
+            
+            requestAnimationFrame(animate); // Request next frame
         }
 
-        initializeEarth();
-        initializePlanes();
-        animate();
+        // Initialize and start animation on window load
+        window.onload = function() {
+            initializeEarth();
+            initializePlanes();
+            requestAnimationFrame(animate); // Start the animation loop
+        };
+        
+        // Handle resize
+        window.addEventListener('resize', () => {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+            initializeEarth(); 
+            initializePlanes(); 
+        });
 
     </script>
 </body>
