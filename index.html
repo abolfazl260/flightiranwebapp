@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl"> 
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,8 +15,8 @@
     <style>
         body {
             font-family: 'Vazirmatn', sans-serif;
-            background-color: #023047; 
-            color: #CAF0F8; 
+            background-color: #023047;
+            color: #CAF0F8;
             text-align: center;
             padding: 20px;
             display: flex;
@@ -26,29 +26,41 @@
             min-height: 100vh;
             margin: 0;
             box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
         }
-        .menu-container { 
-            background-color: #0077B6; 
-            border: 1px solid #00B4D8; 
+        #background-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        .menu-container {
+            background-color: rgba(0, 119, 182, 0.85);
+            border: 1px solid #00B4D8;
             padding: 20px;
-            border-radius: 12px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3); 
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             max-width: 550px;
             width: 95%;
             margin-top: 20px;
             display: flex;
             flex-direction: column;
             gap: 10px;
+            z-index: 1;
+            position: relative;
         }
         h1, h2, h3 {
-            font-weight: 900; 
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2); 
-            color: #CAF0F8; 
+            font-weight: 900;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            color: #CAF0F8;
         }
         h1 {
-            font-size: 1.8em; 
+            font-size: 1.8em;
             margin-bottom: 20px;
-            color: #90E0EF; 
+            color: #90E0EF;
         }
         .user-profile {
             margin-bottom: 20px;
@@ -62,12 +74,12 @@
             height: 80px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #00B4D8; 
+            border: 3px solid #00B4D8;
         }
         .user-profile p {
             font-size: 1.1em;
             font-weight: bold;
-            color: #CAF0F8; 
+            color: #CAF0F8;
             margin: 0;
         }
         .button-row {
@@ -78,57 +90,51 @@
             width: 100%;
         }
         .main-menu-button {
-            background-color: #00B4D8; 
-            color: #023047; 
+            background-color: #00B4D8;
+            color: #023047;
             border: none;
             padding: 12px 15px;
-            border-radius: 8px; 
+            border-radius: 8px;
             font-size: 1em;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease; 
+            transition: background-color 0.3s ease, transform 0.2s ease;
             text-decoration: none;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-grow: 1;
             min-width: 120px;
-            max-width: 48%; 
+            max-width: 48%;
             box-sizing: border-box;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            font-weight: bold; 
+            font-weight: bold;
         }
         .main-menu-button:hover {
-            background-color: #90E0EF; 
-            transform: translateY(-2px); 
-            opacity: 1; 
+            background-color: #90E0EF;
+            transform: translateY(-2px);
+            opacity: 1;
         }
         .button-row .main-menu-button.full-width {
-            max-width: 100%; 
+            max-width: 100%;
         }
         .callback-button {
-            background-color: #0077B6; 
-            color: #CAF0F8; 
-            border: 1px solid #00B4D8; 
+            background-color: #0077B6;
+            color: #CAF0F8;
+            border: 1px solid #00B4D8;
         }
         .callback-button:hover {
-            background-color: #005A8D; 
-        }
-        .creative-button { /* استایل برای دکمه جدید و خلاقانه */
-            background-color: #FFBF00; /* رنگ طلایی یا کهربایی */
-            color: #023047; /* متن تیره برای کنتراست */
-        }
-        .creative-button:hover {
-            background-color: #FFD700; /* رنگ طلایی روشن‌تر در هاور */
+            background-color: #005A8D;
         }
     </style>
 </head>
 <body>
+    <canvas id="background-canvas"></canvas>
     <div class="menu-container">
         <h1>منوی اصلی</h1>
         <div class="user-profile">
-            <img id="userProfilePic" src="https://placehold.co/80x80/0077B6/FFFFFF?text=User" alt="عکس پروفایل"> 
+            <img id="userProfilePic" src="https://placehold.co/80x80/0077B6/FFFFFF?text=User" alt="عکس پروفایل">
             <p id="userNameDisplay">کاربر تلگرام</p>
         </div>
         <p class="text-cyan-200">لطفاً یکی از گزینه‌های زیر را انتخاب کنید:</p>
@@ -154,10 +160,6 @@
             <button class="main-menu-button callback-button" data-type="callback" data-callback="lastsecondbutt">بلیط لحظه آخری</button>
             <button class="main-menu-button callback-button" data-type="callback" data-callback="country">گذرنامه</button>
         </div>
-         <!-- دکمه جدید و خلاقانه -->
-        <div class="button-row">
-            <a href="airlinesinfo.html" class="main-menu-button full-width creative-button" data-type="url">✨ شگفتی‌های هوانوردی ✨</a>
-        </div>
         <div class="button-row">
             <button class="main-menu-button callback-button full-width" data-type="callback" data-callback="aboutus">تماس با ما</button>
         </div>
@@ -170,17 +172,20 @@
         </div>
     </div>
     <script>
+        // Initialize Telegram Web App
         Telegram.WebApp.ready();
         Telegram.WebApp.setHeaderColor('secondary_bg_color');
         Telegram.WebApp.setBackgroundColor('bg_color');
         Telegram.WebApp.expand();
 
+        // Configure Main Button
         Telegram.WebApp.MainButton.setText("بازگشت به ربات");
         Telegram.WebApp.MainButton.show();
         Telegram.WebApp.MainButton.onClick(function() {
             Telegram.WebApp.close();
         });
 
+        // Apply Telegram theme parameters to CSS variables
         const applyThemeParams = () => {
             const themeParams = Telegram.WebApp.themeParams;
             if (themeParams) {
@@ -196,6 +201,7 @@
         applyThemeParams();
         Telegram.WebApp.onEvent('themeChanged', applyThemeParams);
 
+        // Display user profile information
         const userProfilePic = document.getElementById('userProfilePic');
         const userNameDisplay = document.getElementById('userNameDisplay');
         const initData = Telegram.WebApp.initDataUnsafe;
@@ -216,35 +222,208 @@
                 userProfilePic.src = user.photo_url;
                 userProfilePic.style.display = 'block';
             } else {
-                userProfilePic.style.display = 'none'; 
+                 userProfilePic.style.display = 'none';
             }
         } else {
             userNameDisplay.textContent = "کاربر ناشناس";
-            userProfilePic.style.display = 'none';
+             userProfilePic.style.display = 'none';
         }
 
         document.querySelectorAll('.main-menu-button').forEach(button => {
             button.addEventListener('click', function(event) {
                 const type = this.dataset.type;
                 if (type === 'url') {
-                    event.preventDefault(); 
+                    event.preventDefault();
                     const url = this.href;
                     if (Telegram.WebApp.openLink) {
-                        Telegram.WebApp.openLink(url); 
+                        Telegram.WebApp.openLink(url);
                     } else {
-                        window.open(url, '_blank'); 
+                        window.open(url, '_blank');
                     }
                 } else if (type === 'callback') {
                     const callbackData = this.dataset.callback;
                     Telegram.WebApp.sendData(JSON.stringify({ action: 'web_app_callback', data: callbackData }));
-                    Telegram.WebApp.close(); 
+                    Telegram.WebApp.close();
                 } else if (type === 'send_time') {
                     const callbackData = this.dataset.callback;
                     Telegram.WebApp.sendData(JSON.stringify({ action: 'send_current_time', data: callbackData }));
-                    Telegram.WebApp.close(); 
+                    Telegram.WebApp.close();
                 }
             });
         });
+
+        // Background Animation Script
+        const canvas = document.getElementById('background-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+
+        window.addEventListener('resize', () => {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+            initializeEarth(); // Re-initialize Earth on resize
+            initializePlanes();
+        });
+
+        const planeIcon = `✈️`;
+        const planeSize = 20;
+        const pathColor = 'rgba(0, 180, 216, 0.25)'; // Slightly more visible path
+        const pathWidth = 1; // Thinner path
+
+        let planes = [];
+        let earth = {};
+
+        // Function to initialize Earth properties
+        function initializeEarth() {
+            earth = {
+                x: width / 2,
+                y: height / 2,
+                radius: Math.min(width, height) * 0.35, // Earth radius based on screen size
+                color1: 'rgba(3, 100, 150, 0.1)', // Faded blue for Earth (ocean)
+                color2: 'rgba(0, 150, 199, 0.15)'  // Slightly darker faded blue
+            };
+        }
+
+        function initializePlanes() {
+            planes = [];
+            const numPlanes = 5; // Reduced number of planes for a cleaner look
+
+            for (let i = 0; i < numPlanes; i++) {
+                const startX = Math.random() * width;
+                const startY = Math.random() * height;
+                let endX = Math.random() * width;
+                let endY = Math.random() * height;
+
+                while (Math.abs(startX - endX) < width * 0.3 && Math.abs(startY - endY) < height * 0.3) {
+                    endX = Math.random() * width;
+                    endY = Math.random() * height;
+                }
+                
+                // Slower speed for each plane
+                const speed = (Math.random() * 0.15 + 0.05) / 100; // Speed: 0.0005 to 0.002
+
+                planes.push({
+                    x: startX,
+                    y: startY,
+                    startX: startX,
+                    startY: startY,
+                    endX: endX,
+                    endY: endY,
+                    progress: Math.random(), // Start at a random progress for variety
+                    speed: speed,
+                    angle: Math.atan2(endY - startY, endX - startX)
+                });
+            }
+        }
+
+        function drawEarth() {
+            ctx.beginPath();
+            const gradient = ctx.createRadialGradient(earth.x, earth.y, earth.radius * 0.5, earth.x, earth.y, earth.radius);
+            gradient.addColorStop(0, earth.color2);
+            gradient.addColorStop(1, earth.color1);
+            ctx.fillStyle = gradient;
+            ctx.arc(earth.x, earth.y, earth.radius, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Add a very subtle border to the Earth
+            ctx.beginPath();
+            ctx.strokeStyle = 'rgba(128, 200, 255, 0.05)'; // Very faint border
+            ctx.lineWidth = 2;
+            ctx.arc(earth.x, earth.y, earth.radius, 0, Math.PI * 2);
+            ctx.stroke();
+        }
+
+        function drawPlane(plane) {
+            // Draw the path
+            ctx.beginPath();
+            ctx.moveTo(plane.startX, plane.startY);
+            ctx.lineTo(plane.endX, plane.endY);
+            ctx.strokeStyle = pathColor;
+            ctx.lineWidth = pathWidth;
+            ctx.setLineDash([5, 5]); // Dashed line for path
+            ctx.stroke();
+            ctx.setLineDash([]); // Reset dash
+
+            // Save context state
+            ctx.save();
+            // Translate to plane's position
+            ctx.translate(plane.x, plane.y);
+            // Rotate to match path direction. Emoji points right by default, so no extra rotation for standard emoji.
+            // If using an SVG pointing upwards, would add Math.PI / 2 to plane.angle.
+            ctx.rotate(plane.angle); 
+            
+            // Draw the plane icon
+            ctx.font = `${planeSize}px Arial`; // Ensure font is set before fillText
+            ctx.fillStyle = 'rgba(202, 240, 248, 0.9)'; // Plane color
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(planeIcon, 0, 0); // Draw emoji at the rotated (0,0)
+            
+            // Restore context state
+            ctx.restore();
+        }
+
+        function updatePlanes() {
+            planes.forEach(plane => {
+                plane.progress += plane.speed;
+
+                plane.x = plane.startX + (plane.endX - plane.startX) * plane.progress;
+                plane.y = plane.startY + (plane.endY - plane.startY) * plane.progress;
+
+                if (plane.progress >= 1) {
+                    plane.progress = 0; // Reset progress
+                    // Assign a new random path starting from an edge
+                    const edge = Math.floor(Math.random() * 4);
+                    switch(edge) {
+                        case 0: // Top edge
+                            plane.startX = Math.random() * width;
+                            plane.startY = -planeSize; // Start slightly off-screen
+                            break;
+                        case 1: // Right edge
+                            plane.startX = width + planeSize;
+                            plane.startY = Math.random() * height;
+                            break;
+                        case 2: // Bottom edge
+                            plane.startX = Math.random() * width;
+                            plane.startY = height + planeSize;
+                            break;
+                        case 3: // Left edge
+                            plane.startX = -planeSize;
+                            plane.startY = Math.random() * height;
+                            break;
+                    }
+                    plane.endX = Math.random() * width;
+                    plane.endY = Math.random() * height;
+                    
+                    // Ensure new path is reasonably long
+                    while (Math.sqrt(Math.pow(plane.startX - plane.endX, 2) + Math.pow(plane.startY - plane.endY, 2)) < Math.min(width, height) * 0.4) {
+                         plane.endX = Math.random() * width;
+                         plane.endY = Math.random() * height;
+                    }
+                    plane.angle = Math.atan2(plane.endY - plane.startY, plane.endX - plane.startX);
+                    plane.x = plane.startX; // Reset current position to new start
+                    plane.y = plane.startY;
+                }
+            });
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            drawEarth(); // Draw Earth first
+            updatePlanes();
+            planes.forEach(drawPlane);
+            requestAnimationFrame(animate);
+        }
+
+        initializeEarth();
+        initializePlanes();
+        animate();
+
     </script>
 </body>
 </html>
