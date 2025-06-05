@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اینفوگرافیک صنعت هوانوردی ایران</title>
+<!-- بارگذاری Tailwind CSS برای استایل‌دهی ریسپانسیو و مدرن -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- بارگذاری Chart.js برای ترسیم نمودارها -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- بارگذاری فونت Vazirmatn از Google Fonts برای پشتیبانی بهتر از زبان فارسی -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+/* استایل‌های پایه برای بدنه صفحه */
+body {
+    font-family: 'Vazirmatn', sans-serif;
+    background-color: #023047; /* رنگ پس‌زمینه تیره */
+    color: #CAF0F8; /* رنگ متن روشن */
+}
+/* کانتینر نمودار برای اطمینان از اندازه صحیح و ریسپانسیو بودن نمودارها */
+.chart-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 350px; /* ارتفاع پیش‌فرض برای موبایل */
+    max-height: 400px;
+}
+/* تنظیم ارتفاع نمودار برای صفحه‌نمایش‌های بزرگتر */
+@media (min-width: 768px) {
+    .chart-container {
+        height: 400px;
+    }
+}
+/* استایل کارت‌های اطلاعاتی */
+.card {
+    background-color: #0077B6; /* رنگ آبی متوسط */
+    border: 1px solid #00B4D8; /* حاشیه آبی روشن‌تر */
+}
+/* استایل کارت‌های آماری */
+.stat-card {
+    background-color: #00B4D8; /* رنگ آبی روشن */
+    color: #023047; /* رنگ متن تیره برای کنتراست */
+}
+/* استایل عنوان‌ها */
+h1, h2, h3 {
+    font-weight: 900; /* فونت ضخیم برای عنوان‌ها */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* سایه متن برای خوانایی بهتر */
+}
+/* استایل عناصر خط زمانی */
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    right: -8px; /* موقعیت دایره نقطه روی خط زمانی */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #90E0EF; /* رنگ دایره */
+    border: 2px solid #023047; /* حاشیه دایره */
+}
+/* استایل فلش‌های جریان (در حالت دسکتاپ) */
+.flow-arrow::after {
+    content: '←'; /* فلش به سمت چپ برای حالت RTL */
+    color: #90E0EF;
+    font-size: 2rem;
+    line-height: 1;
+}
+/* استایل فلش‌های جریان (در حالت موبایل) */
+@media (max-width: 767px) {
+    .flow-arrow::after {
+        content: '↓'; /* فلش به سمت پایین برای حالت موبایل */
+    }
+}
+</style>
+</head>
+<body class="antialiased">
+<div class="container mx-auto p-4 sm:p-6 lg:p-8">
+
+    <!-- بخش سربرگ -->
+    <header class="text-center mb-12">
+        <h1 class="text-4xl md:text-6xl font-black text-white mb-4">آسمان ایران</h1>
+        <p class="text-xl md:text-2xl text-cyan-200">مقاومت و بلندپروازی در صنعت هوانوردی</p>
+    </header>
+
+    <!-- بخش اصلی محتوا -->
+    <main class="space-y-16">
+
+        <!-- بخش تحریم‌ها -->
+        <section id="sanctions">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-white mb-2">آسمانِ در تنگنا: تأثیر تحریم‌ها</h2>
+                <p class="max-w-3xl mx-auto text-lg text-cyan-200">
+                    از سال ۱۹۷۹، تحریم‌های بین‌المللی به شدت صنعت هوانوردی ایران را تحت فشار قرار داده است. این محدودیت‌ها مانع از نوسازی ناوگان و دسترسی به قطعات حیاتی شده و چالش‌های عملیاتی و ایمنی جدی به همراه داشته‌اند.
+                </p>
+            </div>
+            <!-- آمار کلیدی تحریم‌ها -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div class="stat-card rounded-lg shadow-lg p-6">
+                    <p class="text-5xl font-black">~۲۸</p>
+                    <p class="text-lg mt-2 font-bold">سال میانگین عمر ناوگان</p>
+                    <p class="text-sm">(میانگین جهانی: ۲۲ سال)</p>
+                </div>
+                <div class="stat-card rounded-lg shadow-lg p-6">
+                    <p class="text-5xl font-black">~۵۰٪</p>
+                    <p class="text-lg mt-2 font-bold">هواپیماهای زمین‌گیر</p>
+                     <p class="text-sm">(آمار سال ۲۰۲۱)</p>
+                </div>
+                <div class="stat-card rounded-lg shadow-lg p-6">
+                    <p class="text-5xl font-black">+۴۰</p>
+                    <p class="text-lg mt-2 font-bold">سال فعالیت تحت تحریم</p>
+                    <p class="text-sm">(از سال ۱۹۷۹)</p>
+                </div>
+            </div>
+             <!-- پیامدهای ایمنی و خط زمانی -->
+             <div class="card rounded-lg shadow-lg p-6 mt-8 col-span-1 md:col-span-3">
+                <h3 class="text-2xl font-bold text-center text-white mb-4">پیامدهای ایمنی</h3>
+                <p class="text-base text-cyan-100 mb-6 text-center">وابستگی به هواپیماهای قدیمی و چالش‌های نگهداری، ارتباط مستقیمی با سوابق ایمنی دارد. افزایش چشمگیر سوانح پس از سال ۱۹۷۹ گویای این واقعیت تلخ است.</p>
+                <div class="relative border-r-4 border-cyan-400 mx-auto w-fit pr-8">
+                    <div class="timeline-item mb-8 pl-4">
+                        <p class="font-bold text-lg text-white">۱۹۷۹: آغاز تحریم‌ها</p>
+                        <p class="text-cyan-200">شروع محدودیت‌ها علیه صنعت هوانوردی ایران و سرآغاز فرسودگی ناوگان.</p>
+                    </div>
+                    <div class="timeline-item pl-4">
+                        <p class="font-bold text-lg text-white">۲۰۰۲: سانحه ایران ایرتور</p>
+                        <p class="text-cyan-200">سقوط هواپیمای توپولوف در خرم‌آباد با ۱۱۹ کشته، نمونه‌ای از پیامدهای فرسودگی ناوگان.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- بخش بازیگران اصلی (ایرلاین‌ها) -->
+        <section id="players">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-white mb-2">بازیگران اصلی: ناوگانی متنوع</h2>
+                <p class="max-w-3xl mx-auto text-lg text-cyan-200">
+                    صنعت هوانوردی ایران میزبان ترکیبی از شرکت‌های دولتی و خصوصی است که هر یک برای کسب سهمی از بازار در تلاشند. اندازه ناوگان، یکی از شاخص‌های کلیدی قدرت این بازیگران است.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-center text-white mb-4">مقایسه اندازه ناوگان شرکت‌های کلیدی</h3>
+                    <p class="text-base text-cyan-100 mb-6 text-center">این نمودار تعداد هواپیماهای فعال و غیرفعال چند شرکت هواپیمایی بزرگ ایران را نمایش می‌دهد. ماهان ایر به عنوان بزرگترین شرکت، ناوگان قابل توجهی را در اختیار دارد.</p>
+                    <div class="chart-container">
+                        <canvas id="fleetSizeChart"></canvas>
+                    </div>
+                </div>
+                 <div class="card rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-center text-white mb-4">نمایه شرکت‌های برجسته</h3>
+                    <p class="text-base text-cyan-100 mb-6 text-center">هر شرکت هواپیمایی ویژگی منحصربه‌فردی دارد که آن را از دیگران متمایز می‌کند، از قدمت و گستردگی تا ایمنی و خدمات خاص.</p>
+                    <div class="space-y-4">
+                        <div class="bg-cyan-900/50 p-4 rounded-lg">
+                            <p class="font-bold text-lg text-white">✈️ ایران ایر (هما)</p>
+                            <p class="text-cyan-200">قدیمی‌ترین و پرچم‌دار ایران با سابقه‌ای درخشان در کترینگ.</p>
+                        </div>
+                        <div class="bg-cyan-900/50 p-4 rounded-lg">
+                            <p class="font-bold text-lg text-white">✈️ ماهان ایر</p>
+                            <p class="text-cyan-200">بزرگترین شرکت هواپیمایی ایران با ناوگان گسترده و خدمات باکیفیت.</p>
+                        </div>
+                         <div class="bg-cyan-900/50 p-4 rounded-lg">
+                            <p class="font-bold text-lg text-white">✈️ آتا ایرلاینز</p>
+                            <p class="text-cyan-200">شناخته‌شده به عنوان یکی از ایمن‌ترین شرکت‌های هواپیمایی داخلی.</p>
+                        </div>
+                         <div class="bg-cyan-900/50 p-4 rounded-lg">
+                            <p class="font-bold text-lg text-white">✈️ ایران آسمان</p>
+                            <p class="text-red-300">متأسفانه، به دلیل سوابق ایمنی، در لیست شرکت‌های ناامن جهان قرار گرفته است.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش تجربه مسافر و خدمات -->
+        <section id="services">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-white mb-2">تجربه مسافر: خدمات در میان محدودیت‌ها</h2>
+                <p class="max-w-3xl mx-auto text-lg text-cyan-200">
+                   با وجود چالش‌ها، شرکت‌های ایرانی تلاش می‌کنند تا با ارائه خدمات باکیفیت، تجربه سفر خوشایندی برای مسافران فراهم کنند. کترینگ و خدمات دیجیتال از جمله زمینه‌های رقابت هستند.
+                </p>
+            </div>
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-center text-white mb-4">پیشتازان کترینگ در آسمان ایران</h3>
+                    <p class="text-base text-cyan-100 mb-6 text-center">کیفیت غذای داخل پرواز یکی از معیارهای مهم رضایت مسافر است. برخی شرکت‌ها در این زمینه تخصص ویژه‌ای دارند.</p>
+                    <div class="chart-container">
+                        <canvas id="cateringChart"></canvas>
+                    </div>
+                </div>
+                <div class="card rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-center text-white mb-4">خدمات مدرن و مشتری‌مداری</h3>
+                    <p class="text-base text-cyan-100 mb-6 text-center">ارائه خدمات آنلاین و برنامه‌های وفاداری نشان‌دهنده تلاش ایرلاین‌ها برای همگام شدن با استانداردهای جهانی و جذب مشتریان ثابت است.</p>
+                     <div class="space-y-4">
+                        <div class="bg-cyan-900/50 p-4 rounded-lg">
+                            <p class="font-bold text-lg text-white">🏆 برنامه‌های وفاداری</p>
+                            <p class="text-cyan-200">ایران ایر (Skygift)، ماهان (Mahan & Miles) و سپهران (RedMiles) با ارائه امتیاز و مزایا از مسافران دائمی خود قدردانی می‌کنند.</p>
+                        </div>
+                        <div class="bg-cyan-900/50 p-4 rounded-lg">
+                            <p class="font-bold text-lg text-white">💻 پذیرش آنلاین</p>
+                            <p class="text-cyan-200">شرکت‌هایی مانند ماهان و کیش‌ایر با فراهم کردن امکان چک‌این آنلاین، در زمان مسافران صرفه‌جویی می‌کنند.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش ایمنی -->
+        <section id="safety">
+             <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-white mb-2">ایمنی: چالش اصلی صنعت</h2>
+                <p class="max-w-3xl mx-auto text-lg text-cyan-200">
+                    رتبه‌بندی ایمنی شرکت‌های هواپیمایی، که بر اساس سوابق حوادث و رعایت استانداردها انجام می‌شود، تصویری واضح از وضعیت ایمنی در صنعت هوانوردی ایران ارائه می‌دهد. این نمودار تفاوت قابل توجهی را بین شرکت‌ها نشان می‌دهد.
+                </p>
+            </div>
+            <div class="card rounded-lg shadow-lg p-6">
+                <h3 class="text-2xl font-bold text-center text-white mb-4">رتبه‌بندی ایمنی شرکت‌های منتخب (از ۷)</h3>
+                 <div class="chart-container h-96">
+                    <canvas id="safetyRatingChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش آینده -->
+        <section id="future">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-white mb-2">افق‌های آینده: بلندپروازی در برابر واقعیت</h2>
+                <p class="max-w-3xl mx-auto text-lg text-cyan-200">
+                    ایران با وجود تمام موانع، برنامه‌های بلندپروازانه‌ای برای نوسازی ناوگان و تقویت صنعت هوانوردی خود دارد. تحقق این برنامه‌ها به طور کامل به تحولات ژئوپلیتیکی و رفع تحریم‌ها وابسته است.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="stat-card rounded-lg shadow-lg p-8 text-center">
+                    <p class="text-5xl font-black">+$۵۰</p>
+                    <p class="text-2xl mt-2 font-bold">میلیارد دلار</p>
+                    <p class="text-lg mt-1">سرمایه‌گذاری برنامه‌ریزی شده برای خرید هواپیماهای جدید</p>
+                </div>
+                <div class="card rounded-lg shadow-lg p-6">
+                     <h3 class="text-2xl font-bold text-center text-white mb-4">مسیر نوسازی</h3>
+                    <p class="text-base text-cyan-100 mb-6 text-center">این فرآیند نشان می‌دهد که چگونه رفع تحریم‌ها می‌تواند زنجیره‌ای از تحولات مثبت را در صنعت هوانوردی ایران به راه اندازد.</p>
+                    <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4 text-center">
+                        <div class="bg-cyan-900/50 p-3 rounded-lg"><p>رفع تحریم‌ها</p></div>
+                        <div class="flow-arrow"></div>
+                        <div class="bg-cyan-900/50 p-3 rounded-lg"><p>خرید هواپیما</p></div>
+                        <div class="flow-arrow"></div>
+                        <div class="bg-cyan-900/50 p-3 rounded-lg"><p>نوسازی ناوگان</p></div>
+                         <div class="flow-arrow"></div>
+                        <div class="bg-cyan-900/50 p-3 rounded-lg"><p>افزایش ایمنی و ظرفیت</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- بخش پاورقی -->
+    <footer class="text-center mt-16 pt-8 border-t border-cyan-700">
+        <p class="text-cyan-300">این اینفوگرافیک بر اساس داده‌های گزارش جامع شرکت‌های هواپیمایی ایران تهیه شده است.</p>
+    </footer>
+
+</div>
+
+<script>
+    // تابعی برای بسته‌بندی برچسب‌های بلند نمودار در چندین خط
+    function wrapLabel(label, maxWidth) {
+        if (typeof label !== 'string' || label.length <= maxWidth) {
+            return label;
+        }
+        const words = label.split(' ');
+        const lines = [];
+        let currentLine = '';
+        for (const word of words) {
+            // اگر اضافه کردن کلمه فعلی به خط جاری، طول خط را از حداکثر بیشتر کند، خط جدید شروع می‌شود
+            if ((currentLine + word).length > maxWidth && currentLine.length > 0) {
+                lines.push(currentLine.trim());
+                currentLine = '';
+            }
+            currentLine += word + ' ';
+        }
+        lines.push(currentLine.trim()); // اضافه کردن آخرین خط
+        return lines;
+    }
+    
+    // تابع callback برای عنوان Tooltip نمودارها
+    const tooltipTitleCallback = (tooltipItems) => {
+        const item = tooltipItems[0];
+        let label = item.chart.data.labels[item.dataIndex];
+        // اگر برچسب از قبل یک آرایه (چند خط) باشد، آن را به یک رشته تبدیل می‌کند
+        if (Array.isArray(label)) {
+            return label.join(' ');
+        }
+        return label;
+    };
+    
+    // گزینه‌های مشترک برای تمامی نمودارها برای حفظ ثبات بصری
+    const sharedChartOptions = {
+        responsive: true, // نمودار ریسپانسیو باشد
+        maintainAspectRatio: false, // حفظ نسبت ابعاد را غیرفعال می‌کند تا نمودار اندازه کانتینر را بگیرد
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#CAF0F8', // رنگ برچسب‌های راهنما
+                    font: {
+                        family: "'Vazirmatn', sans-serif", // فونت برچسب‌ها
+                        size: 14
+                    }
+                }
+            },
+            tooltip: {
+                titleFont: { family: "'Vazirmatn', sans-serif" }, // فونت عنوان tooltip
+                bodyFont: { family: "'Vazirmatn', sans-serif" }, // فونت متن اصلی tooltip
+                callbacks: {
+                    title: tooltipTitleCallback // استفاده از تابع مشترک برای عنوان tooltip
+                }
+            }
+        },
+        scales: {
+            y: {
+                ticks: { color: '#90E0EF', font: { family: "'Vazirmatn', sans-serif" } }, // استایل تیک‌های محور Y
+                grid: { color: 'rgba(144, 224, 239, 0.2)' } // رنگ خطوط شبکه محور Y
+            },
+            x: {
+                ticks: { color: '#90E0EF', font: { family: "'Vazirmatn', sans-serif" } }, // استایل تیک‌های محور X
+                grid: { color: 'rgba(144, 224, 239, 0.2)' } // رنگ خطوط شبکه محور X
+            }
+        }
+    };
+
+    // داده‌های نمودار اندازه ناوگان
+    const fleetSizeData = {
+        labels: ['ماهان ایر', 'ایران ایر', 'ایران آسمان', 'کیش ایر', 'ایران ایرتور'],
+        datasets: [
+            {
+                label: 'تعداد کل هواپیماها',
+                data: [44, 37, 27, 12, 12],
+                backgroundColor: '#00B4D8', // رنگ ستون‌ها
+            }
+        ]
+    };
+    // ایجاد نمودار میله‌ای اندازه ناوگان
+    new Chart(document.getElementById('fleetSizeChart'), {
+        type: 'bar',
+        data: fleetSizeData,
+        options: sharedChartOptions // استفاده از گزینه‌های مشترک
+    });
+
+    // داده‌های نمودار کترینگ
+    const cateringData = {
+        labels: ['قشم ایر (کترینگ تخصصی)', 'ایران ایر', 'ایران ایرتور'],
+        datasets: [{
+            data: [40, 35, 25],
+            backgroundColor: ['#00B4D8', '#90E0EF', '#CAF0F8'], // رنگ بخش‌های نمودار دایره‌ای
+            borderColor: '#023047', // رنگ حاشیه بخش‌ها
+            hoverOffset: 4 // فاصله هنگام هاور
+        }]
+    };
+    // ایجاد نمودار دایره‌ای کترینگ
+    new Chart(document.getElementById('cateringChart'), {
+        type: 'doughnut',
+        data: cateringData,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                       color: '#CAF0F8',
+                       font: { family: "'Vazirmatn', sans-serif", size: 12 },
+                       boxWidth: 20,
+                       padding: 20,
+                       // تابع سفارشی برای تولید برچسب‌های راهنما (با قابلیت wrap)
+                       generateLabels: function(chart) {
+                            const data = chart.data;
+                            if (data.labels.length && data.datasets.length) {
+                                return data.labels.map(function(label, i) {
+                                    const meta = chart.getDatasetMeta(0);
+                                    const style = meta.controller.getStyle(i);
+                                    return {
+                                        text: wrapLabel(label, 20), // استفاده از wrapLabel برای شکستن متن
+                                        fillStyle: style.backgroundColor,
+                                        strokeStyle: style.borderColor,
+                                        lineWidth: style.borderWidth,
+                                        hidden: isNaN(data.datasets[0].data[i]) || meta.data[i].hidden,
+                                        index: i
+                                    };
+                                });
+                            }
+                            return [];
+                       }
+                    }
+                },
+                tooltip: {
+                     callbacks: {
+                        title: tooltipTitleCallback // استفاده از تابع مشترک برای عنوان tooltip
+                    }
+                }
+            }
+        }
+    });
+
+    // داده‌های نمودار رتبه‌بندی ایمنی
+    const safetyRatingData = {
+        labels: ['کیش ایر', 'ماهان ایر', 'ایران ایر', 'ایران آسمان'],
+        datasets: [{
+            label: 'رتبه ایمنی (از ۷)',
+            data: [7.0, 5.0, 2.0, 2.0],
+             backgroundColor: [ // رنگ‌های مختلف برای هر ستون بر اساس رتبه
+                '#33FF57', /* سبز روشن (برای ایمن‌ترین) */
+                '#FFC300', /* زرد (برای متوسط) */
+                '#FF5733', /* نارنجی (برای کم‌امنیت) */
+                '#C70039'  /* قرمز تیره (برای ناامن‌ترین) */
+            ],
+        }]
+    };
+    // ایجاد نمودار میله‌ای افقی رتبه‌بندی ایمنی
+    new Chart(document.getElementById('safetyRatingChart'), {
+        type: 'bar',
+        data: safetyRatingData,
+        options: {
+            ...sharedChartOptions, // استفاده از گزینه‌های مشترک
+            indexAxis: 'y', // نمودار میله‌ای افقی
+             scales: {
+                x: {
+                    beginAtZero: true,
+                    max: 7, // حداکثر مقدار محور X
+                    ticks: { color: '#90E0EF', font: { family: "'Vazirmatn', sans-serif" } },
+                    grid: { color: 'rgba(144, 224, 239, 0.2)' }
+                },
+                y: {
+                    ticks: { color: '#90E0EF', font: { family: "'Vazirmatn', sans-serif" } },
+                    grid: { display: false } // خطوط شبکه محور Y را نمایش نمی‌دهد
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false // راهنما را نمایش نمی‌دهد زیرا هر ستون رنگ خاص خود را دارد
+                },
+                tooltip: sharedChartOptions.plugins.tooltip // استفاده از تابع مشترک برای عنوان tooltip
+            }
+        }
+    });
+</script>
+</body>
+</html>
